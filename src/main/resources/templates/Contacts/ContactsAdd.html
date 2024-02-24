@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Contact</title>
+	<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+    <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+    <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/dist/js/dextero.js}"></script>
+    <script th:src="@{/dist/js/all.js}"></script>
+    <script th:src="@{/chart js/cities.js}"></script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<header th:include="header::header1">
+	</header> 
+	<div class="content-wrapper">
+		<section class="content-header">
+	    	<div class="container-fluid">
+	        	<div class="row">
+	            	<div class="col-lg-12">
+	                	<div class="card-header text-center pb-2 d-bg-h2 ">
+	                    	<label id="label" class="h2 font-weight-bold">Add Contact</label>
+	                  	</div>
+	                    <div class="card mt-5">
+	                      <div class="card-body">
+	                        <form action="#" th:action="@{/contact/add/save}" method="POST" autocomplete="off">
+	                          <div class="row mt-4">
+							    <div class="col-sm-6">
+								   <div class="row">
+									  <div class="col-sm-4 col-lg-4">
+									    <label class="d-label">Contact Owner:</label>
+									  </div>
+									  <div class="col-sm-6 col-md-4 col-lg-6">
+									            
+									          <!--   <select class="form-control input-anime" name="Contactowner">
+													<option th:each="a : ${employee}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}" selected></option>
+												    <option th:each="a : ${EmployeeDeatilsList}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}"></option>
+												</select>-->	
+									   <select class="form-control input-anime" name="Contactowner">
+													<!--<option th:each="a : ${employee}" th:value="${a.firstname + ' ' + a.lastname}" th:text="${a.firstname + ' ' + a.lastname}" selected></option>
+												    <option th:each="a : ${EmployeeDeatilsList}" th:value="${a.firstname + ' ' + a.lastname}" th:text="${a.firstname + ' ' + a.lastname}"></option>-->
+													
+									      <option th:each="a : ${employee}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}" selected></option>
+									      <option th:each="a : ${EmployeeDeatilsList}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}"></option>
+													
+									  </select>
+									      
+									            </div>
+									        </div>
+									    </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+									                <label class="d-label">Account Name: </label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									           <!--    <select class="form-control input-anime" name="Accountname" required>
+													<option th:each="a : ${AccountList}" th:value="${a.accountname}" th:text="${a.accountname}"></option>
+													</select>-->
+													 <input class="form-control" style=" border-radius: 10px;" th:value="${accountname}" list="AccountList" id="Accountname" name="Accountname" placeholder="Type to search" required>
+													 <datalist id="AccountList">
+														 <option th:each="a : ${AccountList}" th:value="${a.accountname}" ></option>
+														 </datalist>
+									            </div>  
+									        </div>  
+									    </div>
+									    
+									   
+									</div>
+	                        		<div class="row mt-4">
+										 <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 required-field">
+									                <label class="d-label">First Name:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="Firstname" id="Firstname" required>
+									            </div>  
+									        </div>  
+									    </div>
+										
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+									                <label class="d-label">Last Name:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="Lastname" id="Lastname" required>
+									            </div>
+									        </div>
+									    </div>
+									    
+									</div>
+	               
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Title:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="Title">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+									                <label class="d-label">Email:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="Email" id="Email" required>
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Phone Number 1 </label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input class="form-control input-anime" name="Phone" placeholder="Phone Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10" >
+									            </div>
+									        </div>
+									    </div>
+									    
+										 <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+	                                    			 <label class="d-label">Phone Number 2:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									              <!-- <input type="text" class="form-control input-anime" name="Phone">-->
+			                                  	
+			                                  	     <input class="form-control input-anime" name="phone2" placeholder="Phone Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10" >
+			                                  	
+			                                  	</div>
+	                                		</div>
+										</div>
+									</div>
+									
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Contact Source:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									           <select class="form-control input-anime" name="ContactSource">
+													<option th:each="a : ${LeadMasterList}"  th:value="${a.leadsource}" th:text="${a.leadsource}"></option>
+													</select>
+												</div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Executive level:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="executive">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+										<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									           <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Mobile Number 1:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <!-- <input type="text" class="form-control input-anime" name="MobileNumber">-->
+									                 <input class="form-control input-anime" name="MobileNumber" placeholder="Phone Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10" >
+									           
+									            </div>  
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+									                <label class="d-label">Mobile Number 2:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input class="form-control input-anime" name="mobile2" placeholder="Phone Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10" >
+									            </div>
+									        </div>  
+									    </div>
+									</div>
+									
+										<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									           <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Department:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            <input type="text" class="form-control input-anime" name="Department">
+									           
+									            </div>  
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+									                <label class="d-label">Industry:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                 <select class="form-control input-anime" name="Industry" required>
+											       <option th:each="a : ${IndustryList}" th:value="${a.Industry}" th:text="${a.Industry}"></option>
+											       </select>
+									            </div>
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									              <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Linkedinbio :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="linked">
+									            </div>  
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									             <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Secondary Email:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                   <input type="text" class="form-control input-anime" name="Secondaryemail">
+									            </div>
+									        </div>  
+									    </div>
+									</div>
+	                        	
+	                                <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Twitter:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="Twitter">
+									            </div>  
+									        </div>
+									    </div>
+									     <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Skype ID :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                   <input type="text" class="form-control input-anime" name="SkypeID">
+									            </div>
+									        </div>  
+									    </div>
+								    </div>
+								    
+								    <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Contact Status :</label>
+									            </div>
+									             <div class="col-sm-6 col-md-4 col-lg-6">
+										     <!-- <select class="form-control input-anime" name="Contactstatus">
+												<option value="Ringing">Ringing </option>
+												<option value="Interested">Interested </option>
+												<option value="Not Interested">Not Interested </option>
+												<option value="Send mail">Send mail </option>
+												<option value="Contact In Future">Contact In Future </option>
+											</select> -->
+											
+											<select class="form-control input-anime" name="Contactstatus">
+											         <option th:each="a : ${contactList}" th:value="${a.contactstatus}" th:text="${a.contactstatus}"></option>
+											         </select>  
+											                     
+									            </div>
+									        </div>
+									    </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Remark :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                   <input type="text" class="form-control input-anime" name="description">
+									            </div>
+									        </div>  
+									    </div>
+								    </div>
+								    </div>
+								      <!--<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Skype ID :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                   <input type="text" class="form-control input-anime" name="SkypeID">
+									            </div>
+									        </div>
+									    </div>
+									    </div>-->
+								    <br>
+								    
+									 <div class="card-header text-center pb-2 d-bg-h2 ">
+	                    				<label id="label" class="h2 font-weight-bold">Address Information</label>
+	                  				</div>
+	                  				 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 ">
+									                <label class="d-label">Address line 1 :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="address1" >
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Address line 2:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="address2">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 ">
+									               <label class="d-label">Country :</label>
+                                   			</div>
+                                    		<div class="col-sm-6 col-md-4 col-lg-6">
+                                        		<select class="form-control input-anime" onchange="print_state('country', this.selectedIndex);" id="cty" name ="country" >
+			                                   		<option value="">Select Country</option>
+			        							</select>
+                                          	</div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									                 <label class="d-label">State :</label>
+                                           	    </div>
+                                          	<div class="col-sm-6 col-md-6 col-lg-6">
+                                           	    <select id="country" onchange="print_city('state', this.selectedIndex);" name ="state" class="form-control input-anime">
+                                                	<option value="">Select State</option>
+                                              	</select>
+                                       		</div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 ">
+									                 <label class="d-label">City :</label>
+                                                </div>
+                                       		    <div class="col-sm-6 col-md-4 col-lg-6">
+                                         		   <select name="city" id ="state" class="form-control input-anime">
+                                                	  <option value="">Select City</option>
+		                                      	   </select>
+ 												</div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									                <label class="d-label"> Pin Code:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="pincode" >
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+						
+	                               	 <div class="row mt-4">
+	                                	<div class="col-sm-6 col-md-4 col-lg-3">
+	                                    	<button type="submit" class="btn btn-info">ADD</button>
+	                                   	</div>
+	                              	</div>      
+	                                                                  
+	                        	</form> 
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>  
+	        </div>          
+		</section>
+	</div>
+	 <script language="javascript">print_state("sts");</script>
+        <script language="javascript">print_country("cty");</script>
+</body> 
+
+				<script>
+
+				$("#Email").change(function(){
+					var Email = $('#Email').val();
+					$.ajax({
+						url: "[[@{/contactduplicaterefence}]]",
+				        data: { name: Email},
+				        success: function(data){
+				        	if(data == 'true'){
+								alert("Email Already Available !");
+							}	
+				        }
+					});
+				});	
+				</script> 
+</html>

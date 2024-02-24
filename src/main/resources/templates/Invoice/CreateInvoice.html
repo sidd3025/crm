@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Contact</title>
+	<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+    <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+    <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/dist/js/dextero.js}"></script>
+    <script th:src="@{/dist/js/all.js}"></script>
+    <script th:src="@{/chart js/cities.js}"></script>
+</head>
+
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+  
+    <div th:replace="Main/Fragments/supplier-portal-main-header"></div>
+    <div th:replace="Main/Fragments/supplier-portal-main-sidebar"></div>
+ 
+  <div class="content-wrapper">
+  <section class="content-header">
+      <div class="container-fluid">
+      </div>
+  </section>
+  <section class="content">
+   <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-primary">
+          <div class="card-header p-0 pt-1 text-center">
+            <h4>Create Invoice</h4>
+          </div>
+          <form role="form" class="form-horizontal" id="InvoiceForm" th:action="@{/saveCreatedInvoice}" th:object="${createinvoice}" enctype="multipart/form-data" method="post"  autocomplete="off">
+             <div class="card-body">
+             <div th:if="${param.success}" class="alert alert-success" role="alert">
+				Invoice saved...
+      		</div>
+              <!-- <span id="sstate" th:text="${supplier.ship_state}" style="display: none;"></span>-->
+               
+               <!--<span id="s_id" th:text="${supplier.supplier_form_id}" style="display: none;"></span>-->
+              
+              	<input type="hidden" id="splr_id" th:field="*{supplier_id}" >
+               <div class="primary-info grey-bg">
+               		<div class="zb-txn-form">
+               			
+               			<div class="first-div" style="padding: 2%">
+               				<div class="form-group">
+               				 <div class="row">
+					                  <label class="col-form-label col-lg-2 required">Customer Name*</label>
+					                  <div class="input-group col-sm-7">
+					                     <select class="form-control" th:field="*{customer_name}" id="opt_customer_id" required>
+					                       <option value="">Select Customer Name</option>
+					                       <option th:each="customers : ${customers}" th:value="${customers.customer_id}" th:text="${customers.customer_name}"></option>                     
+					                     </select>
+					                  </div>
+					                  <!-- <span id="opt_c_id" style="align-content: center;" ></span> -->
+					                  <input type="hidden" id="opt_c_id" readonly="readonly">
+				               </div>
+	               			</div>
+	               			<div class="form-group">
+	               				 <div class="row">
+					                  <label class="col-form-label col-lg-2 required">Invoice No*</label>
+					                  <div class="input-group col-sm-5">
+					                     <input type="text" class="form-control" id="InvoiceNo" th:value="${InvoiceNo}"  readonly="readonly">
+					                      <input type="hidden" class="form-control" th:field="*{invoice_no}" id="invoiceno">
+					                  </div>
+				               </div>
+	               			</div>
+	               			<div class="form-group">
+	               				 <div class="row">
+					                  <label class="col-form-label col-lg-2">Order Number</label>
+					                  <div class="input-group col-sm-5">
+					                     <input type="text" th:field="*{order_number}" class="form-control" id="ordernumber" placeholder="order number">
+					                  </div>
+				               </div>
+	               			</div>
+	               			<div class="form-group">
+	               				 <div class="row">
+					                  <label class="col-form-label col-lg-2">Invoice Date*</label>
+					                  <div class="input-group col-sm-2">
+					                     <!-- <input type="date" th:field="*{invoice_date}" class="form-control" id="invoice date" placeholder="invoice date"  required="required"> -->
+					                     <input type="text"  th:field="*{invoice_date}" class="form-control" id="invoice_date" placeholder="dd-mm-yyyy" required="required" readonly="readonly">
+					                     <!-- <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span> -->
+					                  </div>
+					                  
+					                  <label class="col-form-label col-lg-1" style="margin-left: 40px">Due Date</label>
+					                  <div class="input-group col-sm-2">
+					                     <!-- <input type="date" th:field="*{invoice_due_date}" class="form-control" id="due date" placeholder="due date" required="required"> -->
+					                     <input type="text" th:field="*{invoice_due_date}" class="form-control" id="due_date" placeholder="dd-mm-yyyy" required="required" readonly="readonly">
+					                  </div>
+				               </div>
+				               
+	               			</div>
+               			
+               				<div class="form-group">
+	               				<div class="row">
+				               	<label class="col-form-label col-lg-2">Terms</label>
+					                  <div class="input-group col-sm-5">
+					                     <input type="text" th:field="*{terms}" class="form-control" id="terms">
+					                  </div>
+				               </div>
+	               			</div>
+               				
+               			</div>
+               			
+               			<hr>
+               			<div class="form-group">
+	               				 <div class="row">
+					                  <label class="col-form-label col-lg-2" >Item*</label>
+					                  <div class="input-group" style="width: 20%;">
+					                  	<select class="form-control" id="selectedItem">
+					                       <option value="0">Select Item</option>
+					                       <option  th:each="items : ${items}" th:id="${items.items_id}" th:value="${items.item_name}" th:text="${items.item_name}"></option>                     
+					                     </select>
+					                     <input type="hidden" id="opt_i_gst" readonly="readonly">
+					                     <!-- <span id="opt_i_gst"></span> -->
+					                  </div>
+					                  
+					                  <label class="col-form-label col-lg-1" style="margin-left: 40px">Quantity*</label>
+					                  <div class="input-group col-sm-2">
+					                     <input type="number" min="1" class="form-control" id="itemQty" placeholder="Enter Quantity">
+					                  </div>
+					                  <label class="col-form-label col-lg-1" style="margin-left: 40px">Rate</label>
+					                  <div class="input-group col-sm-1">
+					                     <span class="col-form-label"  id="rate" ></span>
+					                  </div>
+					                  <div class="input-group col-sm-2" style="display: none;">
+					                     <span id="item_hsn" style="align-content: center;" ></span>
+					                  </div>
+					                  <div class="input-group col-sm-2">
+					                     <input type="button" class="btn btn-success" value="Add" id="addNewItem">
+					                  </div>
+				               </div>
+	               			</div>
+               			<hr>
+	             		
+						  <div class="table-responsive" id="product-div">
+							<table class="table table-bordered" style="width:100%" id="product_table">
+						   		<thead>
+								   
+								    <tr>
+									    <th rowspan="2">Remove</th>
+									    <th rowspan="2">Item Name</th>
+									    <th rowspan="2">Item HSN</th>
+									    <th rowspan="2">Qty</th>
+									    <th rowspan="2">Rate</th>
+									    <th rowspan="2">Amount</th>
+									    <th colspan="6" style="text-align: center;">Tax</th>
+									    <th rowspan="2">Total Amount With Tax</th>
+									</tr>
+									<tr>
+									    <th>CGST%</th>
+									    <th>CGST Amount</th>
+									    <th>SGST%</th>
+									    <th>SGST Amount</th>
+									    <th>IGST%</th>
+									    <th>IGST Amount</th>
+									</tr>
+								</thead>
+								  <tbody class="itemBody">
+								  </tbody>  
+						  </table>
+						</div>
+						
+						<div class="row">
+							<div class="total-section ml-auto mr-4 grey-bg" style="border: none;">
+							<table class="table">
+									<tbody>
+									    <tr>
+									      <th>Total Amount</th>
+									      <td></td>
+									      <td><input type="number" class="form-control" id="TotalAmount" th:field="*{total_amount}" readonly="readonly"/></td>
+									    </tr>
+									    
+									    <tr>
+									      <th >Total CGST</th>
+									      
+									      <td><label></label></td>
+									      
+									      <td><input type="number" class="form-control" id="CGSTAmount" th:field="*{item_total_cgst}" readonly="readonly"></td>
+									    </tr>
+									    <tr>
+									      <th >Total SGST</th>
+									      
+									      <td><label></label></td>
+									      
+									      <td><input type="number" class="form-control" id="SGSTAmount" th:field="*{item_total_sgst}" readonly="readonly"></td>
+									    </tr>
+									    <tr>
+									      <th >Total IGST</th>
+									      
+									      <td><label></label></td>
+									      
+									      <td><input type="number" class="form-control" id="IGSTAmount" th:field="*{item_total_igst}" readonly="readonly"></td>
+									    </tr>
+									    <tr>
+									      <th>Total Amount With Tax (<span>&#8377;</span>)</th>
+									      <td></td>
+									      <td><input type="number" class="form-control" id="Total" th:field="*{invoice_total}" readonly="readonly"> </td>
+									    </tr>
+									</tbody>
+							  </table>
+							</div>
+						</div>
+						<div class="last-div" style="padding: 2%">
+						<div class="ml-auto mr-4 grey-bg">
+								<div class="form-group">
+               					<div class="row">
+				                  <label class="col-form-label">Customer Note</label>
+				                  <div class="input-group col-sm-5">
+				                  		<!-- <input type="text" class="form-control" id="order number" placeholder="order number"> -->
+										<textarea rows="2" cols="50" class="form-control" th:field="*{customer_note}"></textarea>
+				                  </div>
+			            	   </div>
+               				</div>
+							</div>
+						</div>
+               		</div>
+               </div>
+               
+              <!-- <div th:if="${message}" class="alert alert-danger" role="alert">
+		        This email already exists!
+              </div> -->
+              <button type="submit" class="btn btn-primary" >Save</button>
+              <!-- <a id="checkalert" class="btn">try</a> -->
+              <button type="reset" class="btn btn-default">Cancel</button>
+              
+              </div>
+             	 	
+           </form>
+        </div>
+      </div>    
+    </div>
+    </div>
+   </section>
+   </div>
+   
+  <div th:replace="Main/Fragments/main-footer"></div>
+     
+</div>
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//current date
+	 var date = new Date();
+    var year = String(date.getFullYear());
+    var month = String(date.getMonth()+1).padStart(2,'0');
+    var todayDate = String(date.getDate()).padStart(2,'0');
+    var datePattern = todayDate+'-'+month+'-'+year;
+    document.getElementById('invoice_date').value = datePattern;
+    document.getElementById('due_date').value = datePattern;
+	
+    $("#invoice_date, #due_date").datepicker({
+		dateFormat: "dd-mm-yy"
+	}); 
+    
+    
+	var sid = $('#s_id').text();
+	//console.log("supplier id : "+sid);
+	$('#splr_id').val(sid);
+	
+	var invoice_no = $('#InvoiceNo').val();
+	//console.log("Invoice No  : "+invoice_no);
+	$('#invoiceno').val(invoice_no);
+	
+	$('#opt_customer_id').change(function(){
+		
+		var c_id = $(this).val();
+        	//console.log(c_id);
+        	
+        	if ((c_id != '') && (c_id != 0)) {
+        		$.ajax({
+    			    url: "[[@{/InvoiceCustomer/getCustomer}]]",
+    			    type: 'GET',    
+    			    dataType: 'json',
+    			    data: { c_id: c_id }, 
+    			    success: function (data) {
+    				//alert("we are here"+data.state);
+    			    	//console.log('customer state : '+data.state);
+    			         $('#opt_c_id').text(data.state);
+    			    },
+    			    error: function () {
+    			        alert('error');
+    			    }
+    			});
+			} else {
+				alert("Please Select the valid Customer");
+			}
+        	
+        	
+	});
+        	
+	$('#selectedItem').change(function(){
+		
+		var itemName = $('select#selectedItem').find(":selected").val();
+		
+		var itemId  = $('select#selectedItem').find(":selected")[0].id;
+		var iQty = $('#itemQty').val();
+		//console.log(itemName+" and");
+		if ((itemName != '') && (itemName != 0)) {
+			$.ajax({
+			    url: "[[@{/createInvoice/getItem}]]",
+			    type: 'GET',    
+			    dataType: 'json',
+			    data: { id: itemId }, 
+			    success: function (data) {
+			         $('#rate').text(data.rate);
+			         $('#opt_i_gst').text(data.gst);
+			         $('#item_hsn').text(data.hsn);
+			    },
+			    error: function () {
+			        alert('error');
+			    }
+			});
+		} else {
+			alert("Please Select the Items");
+		}
+		
+		  
+	});
+	var count = 1;
+	$('#addNewItem').click(function(){
+		
+		 if(($('#opt_customer_id').val())!=""){
+			 /* event.preventDefault(); */
+				var itemName = $('select#selectedItem').find(":selected").val();
+				//var itemGST=$('select#selectedItem').find(":selected")[0].gst;
+				var itemId  = $('select#selectedItem').find(":selected")[0].id;
+				var rate = $('#rate').text();
+				var item_hsn = $('#item_hsn').text();
+				var qty = $('#itemQty').val();
+				if ((qty != 0) && (itemName != "") && (itemName != 0) && (rate != "") && (rate != 0)) {
+					addItemToTable();
+				} else if((qty == 0) || (itemName == "")) {
+					alert("Please Enter the Item and Quantity");
+					
+				} else{
+					alert("Please Select the Items");
+				}
+				
+		        function addItemToTable(){
+		        	var total=0;
+		        	var order_no = $('#ordernumber').val();
+		        	
+		        	var customer_s = $('#opt_c_id').text();
+		        	var gst = $('#opt_i_gst').text();
+		        	//console.log(customer_s);
+		        	var supplier_s = $('#sstate').text();
+		        	//console.log('supplier State: '+supplier_s);
+		        	if( supplier_s == customer_s){
+			
+						var Amount= parseInt(rate) * qty;
+						var gst = gst;
+						var cgst = parseInt(gst)/2;
+						var cgstAmount = (parseInt(rate) * parseInt(cgst) * qty)/100;
+						var sgst = parseInt(gst)/2;
+						var sgstAmount = (parseInt(rate) * parseInt(sgst) * qty)/100;
+						var igst=0;
+						var igstAmount = 0;
+						var total= parseInt(Amount) + parseInt(cgstAmount) + parseInt(sgstAmount);		//1,000+ (1,000X(18/100))
+		        	
+		        		var TotalAmountWithTax=0;
+		        		TotalAmountWithTax += parseInt(total);
+						
+			        	//var table = '<tr> <td>'+count+'</td> <td >'+itemName+'<input type="hidden" name="itemName" value="'+itemName+'"></td> <td >'+item_hsn+'<input type="hidden" name="item_hsn" value="'+item_hsn+'"></td>  <td >'+qty+'<input type="hidden" name="qty" value="'+qty+'"></td>   <td >'+rate+'<input type="hidden" name="rate" value="'+rate+'"></td> <td >'+Amount+'<input type="hidden" id="Amount" name="amount" value="'+Amount+'"></td> <td>'+cgst+' %<input type="hidden" name="cgst" value="'+cgst+'"> </td> <td>'+cgstAmount+'<input type="hidden" id="cgst_amt" name="cgstAmount" value="'+cgstAmount+'"></td> <td>'+sgst+' %<input type="hidden" name="sgst" value="'+sgst+'"> </td> <td>'+sgstAmount+'<input type="hidden" id="sgst_amt" name="sgstAmount" value="'+sgstAmount+'"></td> <td>'+igst+'<input type="hidden" name="igst" value="'+igst+'"></td> <td>'+igstAmount+'<input type="hidden" name="igstAmount" value="'+igstAmount+'"></td>   <td ><strong><input type="hidden" name="total" id="total" value="'+TotalAmountWithTax+'">' +TotalAmountWithTax+ '</strong></td>    </tr>';
+			        	var table = '<tr> <td><input type="button" class="btn btn-danger removeItem" name="remove"  value="X" /></td> <td >'+itemName+'<input type="hidden" name="itemName" value="'+itemName+'"></td> <td >'+item_hsn+'<input type="hidden" name="item_hsn" value="'+item_hsn+'"></td>  <td >'+qty+'<input type="hidden" name="qty" value="'+qty+'"></td>   <td >'+rate+'<input type="hidden" id="rate" name="rate" value="'+rate+'"></td> <td >'+Amount+'<input type="hidden" id="Amount" name="amount" value="'+Amount+'"></td> <td>'+cgst+' %<input type="hidden" name="cgst" value="'+cgst+'"> </td> <td>'+cgstAmount+'<input type="hidden" id="cgst_amt" name="cgstAmount" value="'+cgstAmount+'"></td> <td>'+sgst+' %<input type="hidden" name="sgst" value="'+sgst+'"> </td> <td>'+sgstAmount+'<input type="hidden" id="sgst_amt" name="sgstAmount" value="'+sgstAmount+'"></td> <td>'+igst+'<input type="hidden" name="igst" value="'+igst+'"></td> <td>'+igstAmount+'<input type="hidden" name="igstAmount" value="'+igstAmount+'"></td>   <td ><strong><input type="hidden" name="total" id="total" value="'+TotalAmountWithTax+'">' +TotalAmountWithTax+ '</strong></td>   <td style="display: none;"><input type="hidden" name="itemId" value="'+itemId+'"></td> </tr>';
+			        	$('#product_table').append(table);
+			        	count++;
+			
+						// TotalAmount calculations
+						totalAmountWithSGSTAmountAndCGSTAmount();
+						 
+					}else{
+						var Amount= parseInt(rate) * qty;
+						var gst = gst;
+						var cgst = 0;
+						var cgstAmount = 0;
+						var sgst = 0;
+						var sgstAmount = 0;
+						var igst=gst;
+						var igstAmount = (rate * igst * qty)/100;
+						var total= parseInt(Amount) + parseInt(igstAmount);	
+		        	
+		        		var TotalAmountWithTax=0;
+		        		TotalAmountWithTax += parseInt(total);
+						
+			        	//var table = '<tr> <td>'+count+'</td> <td >'+itemName+'<input type="hidden" name="itemName" value="'+itemName+'"></td> <td >'+item_hsn+'<input type="hidden" name="item_hsn" value="'+item_hsn+'"></td>  <td >'+qty+'<input type="hidden" name="qty" value="'+qty+'"></td>   <td >'+rate+'<input type="hidden" name="rate" value="'+rate+'"></td> <td >'+Amount+'<input type="hidden" id="Amount" name="amount" value="'+Amount+'"></td> <td>'+cgst+' %<input type="hidden" name="cgst" value="'+cgst+'"> </td> <td>'+cgstAmount+'<input type="hidden" id="cgst_amt" name="cgstAmount" value="'+cgstAmount+'"></td> <td>'+sgst+' %<input type="hidden" name="sgst" value="'+sgst+'"> </td> <td>'+sgstAmount+'<input type="hidden" id="sgst_amt" name="sgstAmount" value="'+sgstAmount+'"></td> <td>'+igst+'<input type="hidden" name="igst" value="'+igst+'"></td> <td>'+igstAmount+'<input type="hidden" id="igst_amt" name="igstAmount" value="'+igstAmount+'"></td>   <td ><strong><input type="hidden" name="total" id="total" value="'+TotalAmountWithTax+'">' +TotalAmountWithTax+ '</strong></td>    </tr>';
+			        	var table = '<tr> <td><input type="button" class="btn btn-danger removeItem" name="remove" value="X" /></td> <td >'+itemName+'<input type="hidden" name="itemName" value="'+itemName+'"></td> <td >'+item_hsn+'<input type="hidden" name="item_hsn" value="'+item_hsn+'"></td>  <td >'+qty+'<input type="hidden" name="qty" value="'+qty+'"></td>   <td >'+rate+'<input type="hidden" id="rate" name="rate" value="'+rate+'"></td> <td >'+Amount+'<input type="hidden" id="Amount" name="amount" value="'+Amount+'"></td> <td>'+cgst+' %<input type="hidden" name="cgst" value="'+cgst+'"> </td> <td>'+cgstAmount+'<input type="hidden" id="cgst_amt" name="cgstAmount" value="'+cgstAmount+'"></td> <td>'+sgst+' %<input type="hidden" name="sgst" value="'+sgst+'"> </td> <td>'+sgstAmount+'<input type="hidden" id="sgst_amt" name="sgstAmount" value="'+sgstAmount+'"></td> <td>'+igst+'<input type="hidden" name="igst" value="'+igst+'"></td> <td>'+igstAmount+'<input type="hidden" id="igst_amt" name="igstAmount" value="'+igstAmount+'"></td>   <td ><strong><input type="hidden" name="total" id="total" value="'+TotalAmountWithTax+'">' +TotalAmountWithTax+ '</strong></td>   <td style="display: none;"><input type="hidden" name="itemId" value="'+itemId+'"></td> </tr>';
+			        	$('#product_table').append(table);
+			        	count++;
+			
+			        	totalAmountWithIGSTAmount();
+						
+					}
+		        	
+		        	//--- for remove select item 
+		        	var removeInvoiceItem = document.getElementsByClassName('btn btn-danger removeItem');
+		        	console.log(removeInvoiceItem.length);
+		        	for (var i = 0; i < removeInvoiceItem.length; i++) {
+		        			var rbutton = removeInvoiceItem[i];
+		        			rbutton.addEventListener('click', function(event){
+		        				buttonClicked = event.target;
+		        				buttonClicked.parentElement.parentElement.remove();
+		        				var customer_s = $('#opt_c_id').text();
+		    		        	//console.log(customer_s);
+		    		        	var supplier_s = $('#sstate').text();
+		    		        	//console.log('supplier State: '+supplier_s);
+		    		        	if( supplier_s == customer_s){
+		    		        		totalAmountWithSGSTAmountAndCGSTAmount();
+		    		        	}
+		    		        	else{
+		    		        		totalAmountWithIGSTAmount();
+		    		        	}
+		        				
+		        			}); 
+		        	}
+		        	
+		        }
+		}else{
+			alert("Select Customer first");
+		} 
+		 
+		
+    });
+	
+	// TotalAmount calculations
+	 function totalAmountWithIGSTAmount(){
+		 var totalAmount = 0;
+       	$('tbody tr td:nth-child(6)').each(function(){
+       		
+       		var value0 = parseInt($('#Amount',this).val());
+       		if (!isNaN(value0)) {
+					totalAmount += value0;
+				}
+       	});
+       	
+       	var igst_a=0;
+       	$('tbody tr td:nth-child(12)').each(function(){
+       		
+       		var value3 = parseInt($('#igst_amt',this).val());
+       		if (!isNaN(value3)) {
+					igst_a += value3;
+				}
+       	});
+       	$('#TotalAmount').val(totalAmount);
+           $('#IGSTAmount').val(igst_a);
+             
+             var TotalAmount = $('#TotalAmount').val();
+             var igstAmount = $('#IGSTAmount').val();
+ 
+             var totalPayment = parseFloat(TotalAmount) + parseFloat(igstAmount);
+             $('#Total').val(totalPayment.toFixed(2));
+	 }
+	 
+	// TotalAmount calculations
+	 function totalAmountWithSGSTAmountAndCGSTAmount(){
+		 var totalAmount = 0;
+       	$('tbody tr td:nth-child(6)').each(function(){
+       		var value = parseInt($('#Amount',this).val());
+       		if (!isNaN(value)) {
+					totalAmount += value;
+				}
+       	});
+       	var cgst_a=0;
+       	$('tbody tr td:nth-child(8)').each(function(){
+       		var value1 = parseInt($('#cgst_amt',this).val());
+       		if (!isNaN(value1)) {
+					cgst_a += value1;
+				}
+       	});
+       	var sgst_a=0;
+       	$('tbody tr td:nth-child(10)').each(function(){
+       		var value2 = parseInt($('#sgst_amt',this).val());
+       		if (!isNaN(value2)) {
+					sgst_a += value2;
+				}
+       	});
+       	  $('#TotalAmount').val(totalAmount);
+             $('#CGSTAmount').val(cgst_a);
+             $('#SGSTAmount').val(sgst_a);
+             
+             var TotalAmount = $('#TotalAmount').val();
+             var cgstAmount = $('#CGSTAmount').val();
+             var sgstAmount = $('#SGSTAmount').val();
+ 
+             var totalPayment = parseFloat(TotalAmount) + parseFloat(cgstAmount) + parseFloat(sgstAmount);
+             $('#Total').val(totalPayment.toFixed(2));
+	 }
+	 
+	
+	
+});
+</script>
+</html>          

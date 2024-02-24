@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Add Product Master </title>
+
+  		
+  		 <link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+        <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+        <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+        <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+        <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+        <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+        <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+        <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+        <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+        <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+        <script th:src="@{/dist/js/dextero.js}"></script>
+        <script th:src="@{/dist/js/all.js}"></script>
+            <!--date-->
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+		<script th:src="@{/chart js/cities.js}"></script>
+</head>
+
+ <body class="hold-transition sidebar-mini layout-fixed">
+    	<header th:include="header::header1"></header> 
+  	   	<div class="content-wrapper">
+            <section class="content-header">
+                <div class="container-fluid">
+ 
+ 
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-header text-center pb-2 d-bg-h2 ">
+                                <lable id="label" class="h2 font-weight-bold">Add Product</lable>
+                            </div>
+                            <div class="card mt-5">
+                                <div class="card-body">
+                                    <form action="#" th:action="@{/product/save}" method="POST" autocomplete="off" enctype="multipart/form-data"> 
+                                   
+                                    <div class="row mt-4">
+                                            <div class="col-sm-4 col-lg-3">
+                                                <label class="d-label">Product Name:</label>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                                <input type="text" class="form-control input-anime" name="itemname" placeholder="Enter Product Name">
+			                                </div>
+                                        </div>
+                                        
+                                          <div class="row mt-4">
+                                            <div class="col-sm-4 col-lg-3">
+                                                <label class="d-label">Description:</label>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                                <input type="text" class="form-control input-anime" name="description" placeholder="Enter Description">
+			                                </div>
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-sm-4 col-lg-3">
+                                                <label class="d-label">HSN :</label>
+                                            </div>
+                                           
+                                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                                <input class="form-control input-anime" type="text" name="hsn" placeholder="Enter HSN Number" >
+                                            </div>
+                                       </div>
+                                       
+                                         <div class="row mt-4">
+                                            <div class="col-sm-4 col-lg-3">
+                                                <label class="d-label">Unit Rate :</label>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                                <input class="form-control input-anime" type="text" name="unitrate" placeholder="Enter Unit Rate" >
+                                            </div>
+                                       </div>
+                                   
+                                   
+                                  <div class="row mt-4">
+									            <div class="col-sm-4 col-lg-3 required-field">
+									                <label class="d-label">Currency:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-4">
+									                  <select  class="form-control input-anime" name="currency" required>
+														  <option >Select Currency</option>
+														       <option value="INR" >₹-INR</option>
+														       <option value="JPY" >¥-JPY</option>
+														       <option value="GBP" >£-GBP</option>
+														       <option value="USD" >$-USD</option>
+													</select>												  
+									            </div>
+									        </div>
+									    
+									    
+									    <div class="row mt-4">
+									            <div class="col-sm-4 col-lg-3 required-field">
+									                <label class="d-label">GST:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-4">
+									                  <select  class="form-control input-anime" name="gst" required>
+														   <option value="0">Apply GST</option>
+													       <option th:value="6" > 6 %</option>
+													       <option th:value="8" > 8 %</option>
+													       <option th:value="10" > 10 %</option>
+													       <option th:value="12" > 12 %</option>
+													       <option th:value="16" > 16 %</option>
+													</select>												  
+									            </div>
+									      </div>
+									    
+                                   
+                                   	<button type="submit" class="btn btn-info mt-4" >Submit</button>         
+                                    </form>  
+                                      <div class="table-responsive mt-4">
+		                                <table id="data-table" data-order='[[ 2, "desc" ]]' border="1" class="table table-bordered">
+		                                    <thead>
+		                                        <tr>
+							    					<th class="text-center">Product Name</th>
+							    					<th class="text-center">Description</th>
+							    					<th class="text-center">HSN</th>
+							    					<th class="text-center">Unit Rate</th>
+							    					<th class="text-center">Currency</th>
+							    					<th class="text-center">GST</th>
+		                                          <!--  <th class="text-center" style="width:15px;">Edit</th>-->
+		                                            <!-- <th class="text-center" style="width:15px;">Delete</th> -->
+		                                        </tr>
+		                                    </thead>
+		                                    <tbody>
+		                                        <tr th:each="p:${productList}" th:if="${p.employeeid}==${UserName}">
+		                                            <td class="text-center" th:text="${p.item_name}"></td> 
+		                                            <td class="text-center" th:text="${p.item_description}"></td> 
+		                                            <td class="text-center" th:text="${p.hsn}"></td>
+		                                            <td class="text-center" th:text="${p.item_rate}"></td>
+		                                            <td class="text-center" th:text="${p.currency}"></td> 
+		                                            <td class="text-center" th:text="${p.item_GST}"></td> 
+		                                            <!--<td class="text-center"><a th:href="@{/EditFeedback/{id}(id=${feedback.id})}"><i class="fa-solid fa-pencil text-success"></i></a></td>-->
+		                                            <!-- <td class="text-center"><a th:href="@{/DeleteFeedback/{id}(id=${feedback.id})}"><i class="fa-solid fa-trash text-danger"></i></a></td> -->
+		                                        </tr>
+		                                    </tbody>
+		                                </table>
+                                    </div>
+                                  </div>
+                             </div>
+                        </div>    
+                    </div>    
+                </div>
+            </section>   
+        </div>
+</body>
+</html>

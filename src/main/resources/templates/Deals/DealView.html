@@ -1,0 +1,220 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Deal</title>
+	<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+    <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+    <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/dist/js/dextero.js}"></script>
+    <script th:src="@{/dist/js/all.js}"></script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<header th:include="header::header1">
+	</header> 
+	<div class="content-wrapper">
+		<section class="content-header">
+	    	<div class="container-fluid">
+	        	<div class="row">
+	            	<div class="col-lg-12">
+	                	<div class="card-header text-center pb-2 d-bg-h2 ">
+	                    	<label id="label" class="h2 font-weight-bold">Add Deal</label>
+	                  	</div>
+	                    <div class="card mt-5">
+	                    	<div class="card-body">
+	                        	<form action="#" th:action="@{/deal/doc/save1}" th:object="${deal}" method="POST" autocomplete="off">
+	                        	 <input type="hidden" th:value="${id}" name="lead_id">
+	                        	  <input type="hidden" th:field="*{id}">
+	                        	  <input type="hidden" th:field="*{employee_id}">
+	                        		<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Deal Owner: </label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <h5 class=""  th:each="a : ${employee}" th:value="${a.firstname + ' ' + a.lastname}" th:text="${a.firstname + ' ' + a.lastname}"  ></h5>
+									      	  </div>
+									     </div>
+									  </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Amount: </label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <h5 class="" th:each="d : ${deal}" th:value="${d.Ammount}" th:text="${d.Ammount}"></h5>
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+	                        	
+	                        	
+	                        		<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Deal Name: </label>
+									            </div>
+									              <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <h5 class="" th:each="d : ${deal}" th:value="${d.dealname}" th:text="${d.dealname}"></h5>
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Account Name: </label>
+									               <!-- <label class="d-label">Closing Date:</label>-->
+									            </div>
+									             <div class="col-sm-6 col-md-4 col-lg-6">
+													  <h5 class="" th:each="d : ${deal}" th:value="${d.accountname}" th:text="${d.accountname}"></h5>
+											    
+									            </div>
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+										  <div class="col-sm-6">
+									         <div class="row">
+									           <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Stage: </label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									               <h5 class="" th:each="d : ${deal}" th:value="${d.stage}" th:text="${d.stage}"></h5>
+									            </div>  
+									         </div>
+									      </div>
+										
+									  <!--<div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Account Name :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									               <select class="form-control input-anime" name="account">
+													<option th:each="a : ${AccountList}" th:value="${a.accountname}" th:text="${a.accountname}"></option>
+													</select>
+									            </div>
+									        </div>
+									    </div>-->
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									             <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Type:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <h5 class="" th:each="d : ${deal}" th:value="${d.type}" th:text="${d.type}"></h5>											  
+									            </div>
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Probability (%): </label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <h5 class="" th:each="d : ${deal}" th:value="${d.probablility}" th:text="${d.probablility}"></h5>										  
+									            </div>
+									        </div>
+									    </div>
+									    
+										 <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+	                                    			<label class="d-label">Lead Source: </label>
+	                                   			</div>
+			                                    <div class="col-sm-6 col-md-6 col-lg-6">
+						                           <h5 class="" th:each="d : ${deal}" th:value="${d.leadsource}" th:text="${d.leadsource}"></h5>
+												</div>
+	                                		</div>
+										</div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Campaign Source: </label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									               <h5 class="" th:each="d : ${deal}" th:value="${d.campaignsource}" th:text="${d.campaignsource}"></h5>
+									            </div>
+									        </div>
+									    </div>
+									    
+									     <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Closing Date: </label>
+	                                    			<!--<label class="d-label">Account Name</label>-->
+	                                   			</div>
+			                                    <div class="col-sm-6 col-md-6 col-lg-6">
+						                         <h5 class="" th:each="d : ${deal}" th:value="${d.closingdate}" th:text="${d.closingdate}"></h5>
+												</div>
+	                                		</div>
+										</div>
+									</div>
+									
+									<div class="row mt-4">
+									   <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label"> deal created date: </label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <h5 class="" th:each="d : ${deal}" th:value="${d.currentdate}" th:text="${d.currentdate}"></h5>
+									            </div>
+									        </div>
+									    </div>
+									   <div class="col-sm-6">
+									        <div class="row">
+									             <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Document approval :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                 <!--   <input type="text" class="form-control input-anime" name="type"> -->
+									                 <select class="form-control input-anime" name="approval">
+													   <option value="approved"></option>
+													  <option value="approved">approved</option>
+													  <option value="Reject">Reject</option>
+													  </select>													  
+									            </div>
+									        </div>  
+									    </div>
+									 </div>
+									 </div>
+	                                <div class="row mt-4">
+	                                	<div class="col-sm-6 col-md-4 col-lg-3">
+	                                    	<button type="submit" class="btn btn-info">Save</button>
+	                                   	</div>
+	                              	</div>     
+	                                                                  
+	                        	</form> 
+	                        	 <div class="row mt-4"> 
+	                              		<a th:href="@{/deallist}">Back to List</a>
+	                             </div> 
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>  
+	        </div>          
+		</section>
+	</div>
+</body> 
+</html>

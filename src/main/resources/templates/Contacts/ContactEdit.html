@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Contact</title>
+	<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+    <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+    <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/dist/js/dextero.js}"></script>
+    <script th:src="@{/dist/js/all.js}"></script>
+    <script th:src="@{/chart js/cities.js}"></script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<header th:include="header::header1">
+	</header> 
+	<div class="content-wrapper">
+		<section class="content-header">
+	    	<div class="container-fluid">
+	        	<div class="row">
+	            	<div class="col-lg-12">
+	                	<div class="card-header text-center pb-2 d-bg-h2 ">
+	                    	<label id="label" class="h2 font-weight-bold">Edit Contact</label>
+	                  	</div>
+	                    <div class="card mt-5">
+	                    	<div class="card-body">
+	                        	<form action="#" th:action="@{/contact/add/save1}" th:object="${contact}" method="POST" autocomplete="off">
+	                        		<input type="hidden" th:field="*{id}">
+	                        		
+	                        		<!-- save id while edit  -->
+	                        		<input type="hidden" >
+	                        		  <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Contact Owner:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            
+									                <select class="form-control input-anime"  th:field="*{contactowner}" >
+													<!--<option th:each="a : ${employee}" th:value="${a.firstname + ' ' + a.lastname}" th:text="${a.firstname + ' ' + a.lastname}" selected></option>-->
+												    <option th:each="a : ${EmployeeDeatilsList}" th:value="${a.firstname + ' ' + a.lastname}" th:text="${a.firstname + ' ' + a.lastname}"></option>
+													
+													</select>
+									      
+									            </div>
+									        </div>
+									    </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+									                <label class="d-label">Account Name: </label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+													 <input type="text" class="form-control input-anime" th:field="*{accountname}" placeholder="Enter Accountname" required>
+									               <!--<select class="form-control input-anime"  th:field="*{accountname}" required>-->
+													<!--<option th:each="a : ${AccountList}" th:value="${a.accountname}" th:text="${a.accountname}"></option>-->
+													<!--</select>-->
+									            </div>  
+									        </div>  
+									    </div>
+									    
+									   
+									</div>
+	                        		<div class="row mt-4">
+										 <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 required-field">
+									                <label class="d-label">First Name:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input type="text" class="form-control input-anime" th:field="*{first_name}" placeholder="Enter Firstname" required>
+									            </div>  
+									        </div>  
+									    </div>
+										
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+									                <label class="d-label">Last Name:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" th:field="*{last_name}" placeholder="Enter Lastname" required>
+									            </div>
+									        </div>
+									    </div>
+									    
+									</div>
+	               
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Account Assign:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <select class="form-control input-anime" th:field="*{employee_id}">
+													<!--<option th:each="a : ${employee}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}" selected></option>-->
+												    <option th:each="a : ${EmployeeDeatilsList}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}"></option>
+													
+													</select>
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+									                <label class="d-label">Email:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:field="*{email}" placeholder="Enter Email" required>
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Department:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                   <input type="text" class="form-control input-anime" th:field="*{department}" placeholder="Enter Department">
+									            </div>
+									        </div>
+									    </div>
+									    
+										 <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+	                                    			 <label class="d-label">Phone Number 1:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:field="*{phone_number}" placeholder="Enter Phone" >
+			                                  	</div>
+	                                		</div>
+										</div>
+									</div>
+									
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Contact Source:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <input type="text" class="form-control input-anime" th:field="*{contactsource}" placeholder="Enter Executive">
+												</div>
+									        </div>
+									    </div>
+									   
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Phone Number 2</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:field="*{phone_number2}" placeholder="Enter Executive">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Mobile Number 1:</label>
+									            </div>
+									             <div class="col-sm-6 col-md-4 col-lg-6">
+										
+										               <input type="text" class="form-control input-anime" th:field="*{mobile_number}" placeholder="Enter Number">  
+	              	                                        
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Mobile Number 2:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:field="*{mobile_number2}" placeholder="Enter Number">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 required-field">
+									                <label class="d-label">Industry:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                   <input type="text" class="form-control input-anime" th:field="*{industry}" placeholder="Enter Industry" required>
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Linkedinbio :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:field="*{linkedin_bio}" placeholder="Enter Linkedinbio">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+	                        	
+	                                <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Title:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                      <input type="text" class="form-control input-anime" th:field="*{title}" placeholder="Enter Title">
+									            </div>
+									        </div>
+									    </div>
+									     <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Twitter:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:field="*{twitter}" placeholder="Enter Twitter">
+									            </div>  
+									        </div>  
+									    </div>
+								    </div>
+								    
+								      <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Secondary Email: :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                   <input type="text" class="form-control input-anime" th:field="*{secondaryemail}" placeholder="Enter Secondary Email">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label"> Skype ID :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+													
+													<input type="text" class="form-control input-anime" th:field="*{skypeid}" placeholder="Enter Skype ID">
+									                   
+									            </div>
+									        </div>  
+									    </div>
+									    </div>
+									    
+									     <div class="row mt-4">
+									        <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Executive level:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:field="*{executive_level}" placeholder="Enter Executive">
+									            </div>
+									        </div>
+									      </div>
+									      <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Contact Status :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <select class="form-control input-anime" th:field="*{contactstatus}" name="contactstatus">
+											         <option th:each="a : ${contactList}" th:value="${a.contactstatus}" th:text="${a.contactstatus}"></option>
+											         </select> 
+									            </div>
+									        </div>  
+									    </div>
+									  </div>
+									  
+									   <div class="row mt-4">
+									        <div class="col-sm-6">
+									        <div class="row">
+												
+												 <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Remarks :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                   <input type="text" class="form-control input-anime" th:field="*{description}" placeholder="Enter Remarks" >
+									            </div>
+									            
+									             
+									        </div>
+									      </div>
+									  </div>
+								    <br>
+								    <!-- Start with addrees part-->
+									 <div class="card-header text-center pb-2 d-bg-h2 ">
+	                    				<label id="label" class="h2 font-weight-bold">Address Information</label>
+	                  				</div>
+	                  				 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 ">
+									                <label class="d-label">Address line 1 :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input type="text" class="form-control input-anime" th:field="*{addresslin1}" placeholder="line1" >
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Address line 2:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" th:field="*{addresslin2}" placeholder="line2">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+										<div class="col-sm-6">
+									        <div class="row">
+                                        	 <div class="col-sm-4 col-lg-4 ">
+                                          		<label class="d-label">Country :</label>
+                                   			</div>
+                                    		<div class="col-sm-6 col-md-4 col-lg-6">
+                                        		 <input type="text" class="form-control input-anime" th:field="*{country}" placeholder="country" >
+                                          	</div>
+                                      	</div>
+                                      </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label">State :</label>
+                                           	    </div>
+                                          	<div class="col-sm-6 col-md-6 col-lg-6">
+                                           		 <input type="text" class="form-control input-anime" th:field="*{state}" placeholder="state" >
+                                       		</div>  
+									    </div>
+									</div>
+								</div>
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 ">
+									                <label class="d-label">City :</label>
+                                            </div>
+                                       		<div class="col-sm-6 col-md-4 col-lg-6">
+                                         		 <input type="text" class="form-control input-anime" th:field="*{city}" placeholder="city">
+                                          	</div>
+									    </div>
+									   </div>
+                                      	
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									                <label class="d-label"> Pin Code:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" th:field="*{pincode}" placeholder="pincode" >
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<!-- ENd with addrees part-->
+								
+	                               <div class="row mt-4">
+	                                  <div class="col-sm-6 col-md-4 col-lg-3">
+	                                    <button type="submit" class="btn btn-info">Save</button>
+	                                  </div>
+	                              </div>      
+	                                                                  
+	                        	</form> 
+	                        	 <div class="row mt-4"> 
+	                              		<a th:href="@{/contactlist}">Back to List</a>
+	                             </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>  
+	        </div>          
+		</section>
+	</div>
+	 <script language="javascript">print_state("sts");</script>
+        <script language="javascript">print_country("cty");</script>
+</body> 
+</html>

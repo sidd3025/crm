@@ -1,0 +1,338 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Deal</title>
+	<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+    <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+    <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/dist/js/dextero.js}"></script>
+    <script th:src="@{/dist/js/all.js}"></script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<header th:include="header::header1">
+	</header> 
+	<div class="content-wrapper">
+		<section class="content-header">
+	    	<div class="container-fluid">
+	        	<div class="row">
+	            	<div class="col-lg-12">
+	                	<div class="card-header text-center pb-2 d-bg-h2 ">
+	                    	<label id="label" class="h2 font-weight-bold">Add Deal</label>
+	                  	</div>
+	                    <div class="card mt-5">
+	                    	<div class="card-body">
+	                        	<form action="#" th:action="@{/deal/save}" method="POST" enctype="multipart/form-data" autocomplete="off">
+	                        	 <input type="hidden" th:value="${id}" name="lead_id">
+	                        		<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Deal Owner</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            
+									               <select class="form-control input-anime" name="dealowner">
+													<option th:each="a : ${employee}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}" selected></option>
+												    <option th:each="a : ${EmployeeDeatilsList}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}"></option>
+													
+													</select>
+									      
+									      	  </div>
+									     	</div>
+									  </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+									                <label class="d-label">Deal Name</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:value="${dealname}" name="dealname"required>
+									             </div>  
+									        </div>  
+									    </div>  
+									</div>
+	                        	
+	                        	
+	                        	
+	                        		<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 required-field">
+									                <label class="d-label">Stage:</label>
+									            </div>
+									              <div class="col-sm-6 col-md-4 col-lg-6">
+									                <!--<input type="text" class="form-control input-anime" value="${dealname}" name="dealname"required>
+									                -->
+									            <select class="form-control input-anime" name="stage" required>
+													<option th:each="a : ${StageList}" th:value="${a.stage}" th:text="${a.stage}"></option>
+													</select> </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Account Name</label>
+									               <!-- <label class="d-label">Closing Date:</label>-->
+									            </div>
+									             <div class="col-sm-6 col-md-4 col-lg-6">
+													 
+													  <input class="form-control" style=" border-radius: 10px;" th:value="${accountname}" list="Accountlist" id="AccountName" name="AccountName" placeholder="Type to search">
+													 <datalist id="Accountlist">
+														 <option th:each="a : ${Accountlist}" th:value="${a.accountname}" ></option>
+														 </datalist>
+													 
+									           <!--   <input class="form-control input-anime" type="date" name="closingdate" id="date1" placeholder="DD-MM-YYYY" required>   -->
+									             <!--  $("#date1").datepicker({ dateFormat: "dd-mm-yy"  }).datepicker('setDate','0'); -->
+	                                                              
+	              	                                        
+									            </div>
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+										  <div class="col-sm-6">
+									         <div class="row">
+									           <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Probability (%) :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <!-- <select class="form-control input-anime" name="stage" required>
+													<option th:each="a : ${StageList}" th:value="${a.stage}" th:text="${a.stage}"></option>
+													</select>-->
+													
+													<select  class="form-control input-anime" name="probability">
+														 <option value="10">10%</option>
+														 <option value="20">20%</option>
+								                         <option value="30">30%</option>
+														 <option value="40">40%</option>
+														 <option value="50">50%</option>
+														 <option value="60">60%</option>
+								                         <option value="70">70%</option>
+														 <option value="80">80%</option>
+													     <option value="90">90%</option>
+														 <option value="100">100%</option>
+													</select>		
+									            </div>  
+									         </div>
+									      </div>
+										  
+									    <div class="col-sm-6">
+									        <div class="row">
+									             <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Type :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                 <!--   <input type="text" class="form-control input-anime" name="type"> -->
+									                 <select class="form-control input-anime" name="type">
+													  <option value="Advertisement">-None-</option>
+													  <option value="Cold Call">Existing Business</option>
+													  <option value="Cold Call">New Business</option>
+													  </select>													  
+									            </div>
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 required-field">
+									                <label class="d-label">Campaign Source:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <input type="text" class="form-control input-anime" name="campaign">												  
+									            </div>
+									        </div>
+									    </div>
+									    
+										 <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+	                                    			<label class="d-label">Lead Source:</label>
+	                                   			</div>
+			                                    <div class="col-sm-6 col-md-6 col-lg-6">
+						                           <input class="form-control" style="border-radius: 10px;" th:value="${leadsource}" list="LeadMasterList" id="LeadSource" name="LeadSource" placeholder="Type to search">
+													 <datalist id="LeadMasterList">
+														 <option th:each="a : ${LeadMasterList}" th:value="${a.leadsource}" th:text="${a.leadsource}"></option>
+														 </datalist>
+						                        <!--  
+						                           <select class="form-control input-anime" name="LeadSource">
+													<option th:each="a : ${LeadMasterList}" th:value="${a.leadsource}" th:text="${a.leadsource}"></option>
+													</select>-->
+												</div>
+	                                		</div>
+										</div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Upload Documents:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input type="file" name="readingmaterail"  id="readingPdfFile"  multiple>
+									            </div>
+									        </div>
+									    </div>
+									    
+									     <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Closing Date:</label>
+	                                    			<!--<label class="d-label">Account Name</label>-->
+	                                   			</div>
+			                                    <div class="col-sm-6 col-md-6 col-lg-6">
+						                         <input class="form-control input-anime" type="date" name="closingdate" id="date1" placeholder="DD-MM-YYYY" required> 
+						                        <!-- <input class="form-control" style=" border-radius: 10px; "list="Accountlist" id="AccountName" name="AccountName" placeholder="Type to search">
+													 <datalist id="Accountlist">
+														 <option th:each="a : ${Accountlist}" th:value="${a.accountname}" ></option>
+														 </datalist>-->
+													
+												</div>
+	                                		</div>
+										</div>
+									</div>
+									 
+								
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label" for="originalPrice">Original Amount :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									          		<!--<input type="text" class="form-control input-anime" th:value="${Ammount}" id="originalPrice" name="amount" required>-->
+									            <input type="number" th:value="${Ammount}" id="originalPrice" name="amount">
+									            </div>
+									        </div>
+									    </div>
+									    
+									     <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label" for="discountPercentage">Discount Percentage:</label>
+	                                    		</div>
+			                                    <div class="col-sm-6 col-md-6 col-lg-6">
+						                        <!-- <input type="number" id="discountPercentage" name="discount" placeholder="Enter discount percentage">-->
+												<input type="number" id="discountPercentage" name="discountPercentage">
+												<button type="button" onclick="calculateDiscount()">Calculate Discount</button>
+												</div>
+	                                		</div>
+										</div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label" for="discountPercentage">Discount Amount:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									          		<!--<input type="text" class="form-control input-anime" th:value="${Ammount}" id="originalPrice" name="amount" required>-->
+									            <input type="text" id="discountAmount" name="discountamount" readonly>
+									            </div>
+									        </div>
+									    </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label" for="discountPercentage">Contact Person:</label>
+	                                    		</div>
+			                                    <div class="col-sm-6 col-md-6 col-lg-6">
+						                           <input type="text" class="form-control input-anime" th:value="${contactperson}" name="contactperson">
+									          </div>
+	                                		</div>
+										</div>
+                                   </div>
+									
+									
+
+									 <div class="table-responsive mt-4">
+		                                 <table  id="data-table" data-order='[[ 0, "desc" ]]' border="1" class="table table-bordered table-head-fixed table-striped">
+		                                    <thead>
+		                                        <tr>
+		                                            <th class="text-center">Product Name</th>
+		                                        </tr>
+		                                    </thead>
+		                                    <tbody>
+		                                        <tr th:each="leads1:${lead}">
+		                                            <td class="text-center">
+		                                            	<table class="table table-bordered table-head-fixed table-striped">
+		                                            		<tr th:each="lead:${ProductMaplist}" th:if="${lead.leadid}==${id}" name="product">
+		                                            			<td th:each="p:${productList}" th:if="${p.id}==${lead.productid}" th:text="${p.item_name}"></td>
+		                                            		</tr>
+		                                            	</table>
+		                                            </td> 
+		                                        </tr>	
+		                                    </tbody>
+		                                </table>        
+	                            	</div>
+                   
+								
+									    
+	                               	 <div class="row mt-4">
+	                                	<div class="col-sm-6 col-md-4 col-lg-3">
+	                                    	<button type="submit" class="btn btn-info">ADD</button>
+	                                   	</div>
+	                              	</div>      
+	                                                                  
+	                        	</form> 
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>  
+	        </div>          
+		</section>
+	</div>
+ 
+<!-- <script>
+        function calculateDiscount() {
+            var originalPrice = document.getElementById('originalPrice').value;
+             var discountPercentage = document.getElementById('discountPercentage').value;
+
+            // Check if inputs are valid numbers
+            if (isNaN(originalPrice) || isNaN(discountPercentage)) {
+                alert('Please enter valid numbers for original price and discount percentage.');
+                return;
+            }
+
+            var discountAmount = originalPrice - (originalPrice * discountPercentage / 100);
+            document.getElementById('discountAmount').textContent = discountAmount.toFixed(2);
+        }
+    </script>-->
+    
+    <script>
+	function calculateDiscount() {
+    	var originalPrice = parseFloat(document.getElementById('originalPrice').value);
+   		var discountPercentage = parseFloat(document.getElementById('discountPercentage').value);
+
+    // Check if inputs are valid numbers
+    	if (isNaN(originalPrice) || isNaN(discountPercentage)) {
+        	alert('Please enter valid numbers for original price and discount percentage.');
+        	return;
+    }
+
+   		 var discountAmount = originalPrice * (discountPercentage / 100);
+   		 var discountedPrice = originalPrice - discountAmount;
+
+    document.getElementById('discountAmount').value = discountedPrice.toFixed(2);
+}
+</script>
+    
+
+</body>
+</html>

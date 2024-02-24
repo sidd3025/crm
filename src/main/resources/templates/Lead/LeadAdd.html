@@ -1,0 +1,573 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Lead</title>
+<!--	<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+    <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+    <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/dist/js/dextero.js}"></script>
+    <script th:src="@{/dist/js/all.js}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+		<script th:src="@{/chart js/cities.js}"></script>-->
+		
+		 <link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+        <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+        <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+        <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+        <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+        <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+
+        <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+        <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+        <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+        <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+        <script th:src="@{/dist/js/dextero.js}"></script>
+        <script th:src="@{/dist/js/all.js}"></script>
+            <!--date-->
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+		<script th:src="@{/chart js/cities.js}"></script>
+		<!--	<style>
+			  .d-label:after {
+			    content:" *";
+			    color: red;
+			  }
+			</style>-->
+		<script type="text/javascript">  
+		    $(document).ready(function() {  
+		        $('select[multiple]').multiselect({
+			        allSelectedText: 'All',
+			    	includeSelectAllOption: true,
+			    	buttonWidth:'400px'
+		    	});  
+		    	$("#birthyear").datepicker({
+		       		dateFormat: "yy-mm-dd"
+		       	}); 
+		        $("#joiningdate").datepicker({
+		        	dateFormat: "dd-mm-yy"
+		        }); 
+				var age="";
+		     	$('#dob').datepicker({
+		     		changeMonth: true,
+		         	changeYear:true,
+		        	yearRange: "1950:2010",
+		       		dateFormat: 'dd-mm-yy',
+		      		onSelect: function(value, ui) {
+		            	var today = new Date();
+		            	age = today.getFullYear() - ui.selectedYear;
+		            	$('#AGE').val(age);
+		           	}
+		        })
+		     });
+		 </script>  
+		 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+       <script>
+        $(document).ready(function() {
+            // Add change event listener to the product selection dropdown
+            $("#multiple-skillSet").change(function() {
+                var productId = $(this).val(); // Get the selected product ID
+                $.get("/getAmount", { product: productId }, function(data) {
+                    // Update the amount div with the fetched amount
+                    $("#amount").text("Amount: " + data);
+                });
+            });
+        });
+       </script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<header th:include="header::header1">
+	</header> 
+	<div class="content-wrapper">
+		<section class="content-header">
+	    	<div class="container-fluid">
+	        	<div class="row">
+	            	<div class="col-lg-12">
+	                	<div class="card-header text-center pb-2 d-bg-h2 ">
+	                    	<label id="label" class="h2 font-weight-bold">Add Lead</label>
+	                  	</div>
+	                    <div class="card mt-5">
+	                    	<div class="card-body">
+	                        	<form action="#" th:action="@{/leadall/save}" method="POST" enctype="multipart/form-data" autocomplete="off">
+	                        	  <input type="hidden" th:value="${id}" name="contact_id">
+	                        		<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Lead Owner</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            
+									               <select class="form-control input-anime" name="leadowner">
+												
+													<option th:each="a : ${employee}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}" selected></option>
+												    <option th:each="a : ${EmployeeDeatilsList}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}"></option>
+													
+													</select>
+									      	  </div>
+									     	</div>
+									   </div>
+									  
+								            <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Lead Name :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:value="${leadname}" name="leadname">
+									            </div>
+									        </div>
+									     </div> 
+								       </div>
+									
+									
+									
+	                        		<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 required-field">
+													<label class="d-label">Account Name :</label>
+													</div>
+													<div class="col-sm-6 col-md-4 col-lg-6">
+									                 
+									                 	
+												 <input class="form-control" style=" border-radius: 10px;" th:value="${accountname}" list="Accountlist" id="AccountName" name="AccountName" placeholder="Type to search" required>
+													 <datalist id="Accountlist">
+														 <option th:each="a : ${Accountlist}" th:value="${a.accountname}" ></option>
+														 </datalist>
+									                 
+									                 <!-- <select class="form-control input-anime" name="AccountName">
+													  <option th:each="a : ${Accountlist}" th:value="${a.accountname}" th:text="${a.accountname}"></option>
+													  </select>-->
+									               </div>
+									           </div>
+									        </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label"> Lead Stage :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									              <!--  <input type="text" class="form-control input-anime" th:value="${stage}" name="stage">-->
+									                
+											         <select class="form-control input-anime" name="stage">
+											         <option th:each="a : ${StagestatusList}" th:value="${a.stagestatus}" th:text="${a.stagestatus}"></option>
+											         </select>
+											         
+									                <!-- <input class="form-control" style=" border-radius: 10px;" th:value="${industry}" list="IndustryMasterList" id="Industry" name="stage" placeholder="Type to search" required>
+													 <datalist id="IndustryMasterList">
+														 <option th:each="a : ${StagestatusList}" th:value="${a.Industry}" ></option>
+														 </datalist>-->
+														 
+									            </div>
+									        </div>  
+									    </div>
+									</div>
+									
+									    <div class="row mt-4">
+										  <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+												  <label class="d-label">First Name :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input type="text" class="form-control input-anime" th:value="${firstname}" name="Firstname">
+									            </div>  
+									          </div>  
+									      </div>
+									   
+									     <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+													 <label class="d-label">Last Name</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" th:value="${lastname}" name="Lastname">
+									            </div>  
+									          </div>  
+									       </div>
+									     </div>
+									     
+								      <div class="row mt-4">
+										  <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 ">
+												  <label class="d-label">Lead Source:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									          <input class="form-control" style="    border-radius: 10px;" th:value="${contactsource}" list="LeadMasterList" id="LeadSource" name="LeadSource" placeholder="Type to search">
+													 <datalist id="LeadMasterList">
+														 <option th:each="a : ${LeadMasterList}" th:value="${a.leadsource}" th:text="${a.leadsource}"></option>
+														 </datalist>   </div>  
+									          </div>  
+									      </div>
+									   
+									     <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+													 <label class="d-label">Product</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									          
+									              <select class="form-control input-anime" name="product_id"  id="multiple-skillSet" multiple="multiple">
+			                                        <option th:each="c:${productList}" 
+			                                                 th:value="${c.id}"
+			                                                 th:text="${c.item_name}"></option>
+			                                      </select>
+									               </div>  
+									            </div>  
+									          </div>  
+									       </div>
+									   
+									
+									<div class="row mt-4">
+										 <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 required-field">
+												   <label class="d-label">Email :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:value="${email}" name="Email"required>
+									            </div>  
+									        </div>
+									    </div>
+										
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													 <label class="d-label">Title :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" th:value="${title}" name="Title">
+									            </div>
+											</div>
+									    </div>
+							          </div> 
+									
+									
+									<div class="row mt-4">
+									 <div class="col-sm-6">
+									   <div class="row">
+									       <div class="col-sm-4 col-lg-4">
+													  <label class="d-label">Phone Number1 :</label>
+									       </div>
+									       <div class="col-sm-6 col-md-4 col-lg-6">
+									                  <!-- <input type="text" class="form-control input-anime" name="Phone">-->
+									            <input class="form-control input-anime" th:value="${phone}" name="Phone" placeholder="Phone Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10">
+									         
+									       </div>
+													
+	                                    			
+	                                		</div>
+										</div>
+										
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Phone Number 2 </label>
+	                                   			</div>
+			                                    <div class="col-sm-6 col-md-6 col-lg-6">
+													
+												  <input class="form-control input-anime" th:value="${phone}" name="Phone2" placeholder="Phone Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10">
+                                                
+			                                  	</div>
+													
+									               
+									        </div>
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									 <div class="col-sm-6">
+									   <div class="row">
+									       <div class="col-sm-4 col-lg-4">
+													  <label class="d-label">Mobile Number 1:</label>
+									       </div>
+									       <div class="col-sm-6 col-md-4 col-lg-6">
+									                  <!-- <input type="text" class="form-control input-anime" name="Phone">-->
+									            <input class="form-control input-anime" th:value="${phone}" name="mobile1" placeholder="Phone Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10">
+									         
+									       </div>
+													
+	                                    			
+	                                		</div>
+										</div>
+										
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Mobile Number 2</label>
+	                                   			</div>
+			                                    <div class="col-sm-6 col-md-6 col-lg-6">
+													
+												  <input class="form-control input-anime" th:value="${phone}" name="mobile2" placeholder="Phone Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10">
+												
+			                                  	</div>
+													
+									               
+									        </div>
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+										<div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+													 <label class="d-label">Lead Status:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <select class="form-control input-anime" th:value="${contactstatus}" name="LeadStatus">
+											         <option th:each="a : ${StatusList}" th:value="${a.leadstatus}" th:text="${a.leadstatus}"></option>
+											         </select>
+									            </div>
+													
+									              
+									        </div>  
+									    </div>
+											
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+													
+													  <label class="d-label">Industry:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									              
+									               <input class="form-control" style=" border-radius: 10px;" th:value="${industry}" list="IndustryMasterList" id="Industry" name="Industry" placeholder="Type to search" required>
+													 <datalist id="IndustryMasterList">
+														 <option th:each="a : ${IndustryMasterList}" th:value="${a.Industry}" ></option>
+														 </datalist>
+									              
+									             <!--  <select class="form-control input-anime" aria-value="industry" name="Industry">
+											       <option th:each="a : ${IndustryMasterList}" th:value="${a.Industry}" th:text="${a.Industry}"></option>
+											       </select>-->
+									            </div>  
+									            
+									                
+									     </div>
+									 </div>
+									    
+									</div>
+									
+									<div class="row mt-4">
+	          							<div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+													<label class="d-label">No.of Employee:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                   <select class="form-control input-anime" name="NoofEmployee">
+											         <option th:each="a : ${EmployeeList}" th:value="${a.emp}" th:text="${a.emp}"></option>
+											         </select>
+									            </div>
+													
+									               
+									        </div>  
+									    </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													 <label class="d-label">Annual Revenue:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									             <!--  <input type="text" class="form-control input-anime" name="AnnualRevenue">-->
+									                <select class="form-control input-anime" name="AnnualRevenue">
+											         <option th:each="a : ${AnnualList}" th:value="${a.annual_revenu}" th:text="${a.annual_revenu}"></option>
+											         </select>
+									            </div>  
+													
+									               
+									        </div>
+									    </div>
+									    
+									</div>
+	                        	
+	                                <div class="row mt-4">
+										<div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+													 <label class="d-label">Secondary Email:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                   <input type="text" class="form-control input-anime" th:value="${secoundaryemail}" name="Secoundaryemail">
+									            </div>
+											 </div>  
+									    </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Skype ID:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" th:value="${skypeid}" name="SkypeID">
+									            </div>  
+											 </div>
+									    </div>
+								    </div>
+								 
+								    <div class="row mt-4">
+								       <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+													 <label class="d-label"> Twitter:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                   <input type="text" class="form-control input-anime" th:value="${twitter}" name="Twitter">
+									            </div>
+									          </div>  
+									        </div>
+									         <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Fax:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="Fax">
+									            </div>  
+											 </div>
+									    </div>
+									  </div>
+									  
+									   <div class="row mt-4">
+					         			  <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Probability (%):</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                  <select  class="form-control input-anime" name="probability">
+														 <option value="10">10%</option>
+														 <option value="20">20%</option>
+								                         <option value="30">30%</option>
+														 <option value="40">40%</option>
+														 <option value="50">50%</option>
+														 <option value="60">60%</option>
+								                         <option value="70">70%</option>
+														 <option value="80">80%</option>
+													     <option value="90">90%</option>
+														 <option value="100">100%</option>
+													</select>												  
+									            </div>
+									        </div>
+									    </div>
+									     <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Remarks:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="remarks">
+									            </div>  
+											 </div>
+									    </div>
+									 </div>
+									 
+									  <div class="row mt-4">
+					         			  <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Amount :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              
+									              <input class="form-control input-anime" id="amount" name="amount">
+									              </div>
+									        </div>
+									    </div>
+									   <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Campagin:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									             <select class="form-control input-anime" name="campagin">
+											         <option th:each="a: ${CampaginList}" th:value="${a.campagin}" th:text="${a.campagin}"></option>
+											      </select>
+									            </div>  
+											 </div>
+									    </div>
+								     </div>
+								        
+								       <div class="row mt-4">
+		                            		<div class="col-sm-4 col-md-4 col-lg-2">
+		                                    	<label  for="title" class="d-label">Upload Documents :</label>
+		                                  	</div>
+		                                	<div class="col-sm-6 col-md-4 col-lg-5">
+		                                  		<input type="file" name="readingmaterail"  id="readingPdfFile"  multiple>
+		                                 	</div>
+		                               </div>
+	                               	 
+	                               	 <div class="row mt-4">
+	                                	<div class="col-sm-6 col-md-4 col-lg-3">
+	                                    	<button type="submit" class="btn btn-info">ADD</button>
+	                                   	</div>
+	                              	</div>    
+	                              	<!-- <div class="row mt-4">
+	                                	<div class="col-sm-6 col-md-4 col-lg-3">
+	                                    	<button type="submit" class="btn btn-info">Convert to Deal</button>
+	                                   	<button type="submit" class="btn btn-info txt" style=" background-color: #4d75e1;"><a th:href="@{'/contactconvertdeal/'+${l.id}}" style="color: #fff;">Convert in Deal</button>
+	                                   	</div>
+	                              	</div>-->
+	                              	
+	                              <!--	<td class="text-center" >
+										<button type="submit" class="btn btn-info txt" style=" background-color: #4d75e1;"> <a th:href="@{'/contactconvertdeal/'+${l.id}}" style="color: #fff;">Convert in Deal</button>
+									</td>      
+	                                       -->                           
+	                        	</form> 
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>  
+	        </div>          
+		</section>
+	</div>
+</body> 
+<script>
+$("#multiple-skillSet").change(function(){
+					
+					
+					var landscape = $('#multiple-skillSet').val();
+					
+					$.ajax({
+						url:"[[@{/getmultipledropdown_amount}]]",
+						data:{
+                          
+							name: landscape
+						},
+						  traditional: true,
+						success:function(data){
+							
+							$('#amount').val(data);
+							
+						}
+					});
+				});
+</script> 
+</html>

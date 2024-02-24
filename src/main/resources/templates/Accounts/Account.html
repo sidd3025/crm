@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Account</title>
+	<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+    <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+    <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/dist/js/dextero.js}"></script>
+    <script th:src="@{/dist/js/all.js}"></script>
+     <script th:src="@{/chart js/cities.js}"></script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<header th:include="header::header1">
+	</header> 
+	<div class="content-wrapper">
+		<section class="content-header">
+	    	<div class="container-fluid">
+	        	<div class="row">
+	            	<div class="col-lg-12">
+	            	
+	            	<!-- Add Account  -->
+	                	<div class="card-header text-center pb-2 d-bg-h2 ">
+	                    	<label id="label" class="h2 font-weight-bold">Add Account</label>
+	                  	</div>
+	                    <div class="card mt-5">
+	                    	<div class="card-body">
+	                        	<form action="#" th:action="@{/account/save}" method="POST" autocomplete="off">
+	                        		<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 required-field">
+									                <label class="d-label">Account Owner :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              
+									                <select class="form-control input-anime" name="accountowner" required>
+													<option th:each="a : ${employee}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}" selected></option>
+												    <option th:each="a : ${EmployeeDeatilsList}" th:value="${a.id}" th:text="${a.firstname + ' ' + a.lastname}"></option>
+													
+													</select>
+													
+									            </div>
+									        </div>
+									    </div>
+									    
+									     <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 required-field">
+									                <label class="d-label">Account Name :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="Accountname" id="Accountname" required >
+									            </div>  
+									        </div>  
+									    </div>
+									 </div>
+									    
+									    
+	                        		  <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Account Group :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="Accountgroup">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Account Number :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <!-- <input type="text" class="form-control input-anime" name="Phone">-->
+									                 <input type="text" class="form-control input-anime" name="Accountnumber">
+									                
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 ">
+									                <label class="d-label">Phone Number 1:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <input class="form-control input-anime" name="Phone" placeholder="Phone Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10" >
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Phone Number 2</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <!-- <input type="text" class="form-control input-anime" name="Phone">-->
+									                
+									                 <input class="form-control input-anime" name="phone2" placeholder="Phone Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10" >
+									                
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+	                        	
+	                        	
+	                        		<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label"> Email 1:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <input type="text" class="form-control input-anime" name="email">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Email 2:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="email2">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+	               
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 required-field">
+									                <label class="d-label">Geography :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <select  class="form-control input-anime" name="geography" required>
+														<option value="North">North</option>
+														 <option value="South">South</option>
+													     <option value="East">East</option>
+														 <option value="West">West</option>
+													</select>				
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Parent Account :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="Parentaccount">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Mobile Number 1:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input class="form-control input-anime" name="mobile" placeholder="Mobile Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10" >
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Mobile Number 2:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input class="form-control input-anime" name="mobile2" placeholder="Mobile Number"  pattern="[0-9]{10}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                type = "text" maxlength = "10" >
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									    
+										 
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Account Type :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									               <!--  <input type="text" class="form-control input-anime" name="accounttype"> -->
+									                 <select class="form-control input-anime" name="accounttype">
+													<option th:each="a : ${AccountTypeList}" th:value="${a.account_type}" th:text="${a.account_type}"></option>
+													</select>
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label"> Account Site :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									              <!--   <input type="text" class="form-control input-anime" name="ownership"> -->
+									                <input type="text" class="form-control input-anime" name="Accountsite">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									    
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4 required-field">
+									                <label class="d-label">Industry:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <!--  <input type="text" class="form-control input-anime" name="Industry"> -->
+									                  <select class="form-control input-anime" name="Industry">
+													<option th:each="a : ${IndustryMasterList}" th:value="${a.industry}" th:text="${a.industry}"></option>
+													</select>
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Annual Revenue :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									             <!--  <input type="text" class="form-control input-anime" name="AnnualRevenue">-->
+									                <select class="form-control input-anime" name="AnnualRevenue">
+											         <option th:each="a : ${AnnualList}" th:value="${a.annual_revenu}" th:text="${a.annual_revenu}"></option>
+											         </select>
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Employee:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <select class="form-control input-anime" name="employee">
+													<option th:each="a : ${EmployeeList}" th:value="${a.emp}" th:text="${a.emp}"></option>
+													</select>
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Website :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="Website">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Ticker Symbol :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <input type="text" class="form-control input-anime" name="Tickersymbol">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">DUNS No. :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="duns">
+									            </div>  
+									        </div>  
+									    </div>
+								   </div>
+								   
+								   <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Fax :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <input type="text" class="form-control input-anime" name="Fax">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Account Status :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <select class="form-control input-anime" name="accountstatus">
+											         <option th:each="a : ${AccountstatusList}" th:value="${a.accountstatus}" th:text="${a.accountstatus}"></option>
+											         </select>  
+									            </div>  
+									        </div>  
+									    </div>
+								  </div>
+								  <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Remarks :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <input type="text" class="form-control input-anime" name="remarks">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Description:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="description">
+									            </div>  
+									        </div>  
+									    </div>
+								  </div>
+								  
+								  <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">SIC Code :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <input type="text" class="form-control input-anime" name="SIC">
+									            </div>
+									        </div>
+									    </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Ownership :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <select class="form-control input-anime" name="ownership">
+													<option th:each="a : ${OwnerList}" th:value="${a.ownership}" th:text="${a.ownership}"></option>
+													</select>
+									            </div>  
+									        </div>  
+									    </div>
+								</div>
+									   <!-- <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">IT Landscape:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <select  class="form-control input-anime" name="landscape" id="landscape">
+														 <option value="Software">Software</option>
+														 <option value="Hardware">Hardware</option>
+														 </select>
+									            </div>  
+									        </div>  
+									    </div>
+								  </div>
+								   <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label"> Landscape inside :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <select  class="form-control input-anime" name="landscapeinside" id="landscapeinside">
+														<option th:each="l : ${LandList}" th:value="${l.landscapesoftware}" th:text="${l.landscapesoftware}"></option>
+											          </select>
+									            </div>
+									        </div>
+									    </div>
+								  </div>-->
+	<br>
+	
+		<!--Software info-->
+								<!--	 <div class="card-header text-center pb-2 d-bg-h2 ">
+	                    				<label id="label" class="h2 font-weight-bold">IT Landscape Software</label>
+	                  				</div>
+	                  				 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Email:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <select class="form-control input-anime" name="softemail">
+													<option th:each="a : ${LandList}" th:value="${a.email}" th:text="${a.email}"></option>
+													</select>
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">ERP:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                   <input type="text" class="form-control input-anime" name="softerp">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Accounts & Finance:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <input type="text" class="form-control input-anime" name="softaccandfin">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">CRM:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                  <input type="text" class="form-control input-anime" name="softcrm">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Inventory:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                   <input type="text" class="form-control input-anime" name="softinventory">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label"> Manufacturing:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="softmanufacture">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Operations:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                  <input type="text" class="form-control input-anime" name="softoperation">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label"> HRMS :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="softhrms">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Payroll:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                    <input type="text" class="form-control input-anime" name="softpayroll">
+									            </div>
+									        </div>
+									    </div>
+									    </div>
+									
+									<br>
+									Hardware INfo
+										
+									 <div class="card-header text-center pb-2 d-bg-h2 ">
+	                    				<label id="label" class="h2 font-weight-bold">IT Landscape Hardware</label>
+	                  				</div>
+	                  				 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Email:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                  <select class="form-control input-anime" name="hardemail">
+													<option th:each="a : ${LandList}" th:value="${a.email}" th:text="${a.email}"></option>
+													</select>
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">ERP:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                 <input type="text" class="form-control input-anime" name="harderp">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Accounts & Finance:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <input type="text" class="form-control input-anime" name="hardaccandfin">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">CRM:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                 <input type="text" class="form-control input-anime" name="hardcrm">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Inverntory:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                   <input type="text" class="form-control input-anime" name="hardinventory">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label"> Manufacturing:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="hardmanufacture">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Operation:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                  <input type="text" class="form-control input-anime" name="hardoperation">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label"> HRMS :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="hardhrms">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Payroll:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                  <input type="text" class="form-control input-anime" name="hardpayroll">
+									            </div>
+									        </div>
+									    </div>
+									 </div>   
+								-->	
+									<br>
+									<!--Address INfo-->
+									
+									 <div class="card-header text-center pb-2 d-bg-h2 ">
+	                    				<label id="label" class="h2 font-weight-bold">Address Information</label>
+	                  				</div>
+	                  				 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Address line 1 :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="address1">
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Address line 2:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="address2">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Country:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									               <select class="form-control input-anime" onchange="print_state('country', this.selectedIndex);" id="cty" name ="country">
+			                                   		<option value="">Select Country</option>
+			        							</select>
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">State:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <select id="country" onchange="print_city('state', this.selectedIndex);" name ="state" class="form-control input-anime">
+                                                	<option value="">Select State</option>
+                                              	   </select>
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+									
+									 <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">City:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <select name="city" id ="state" class="form-control input-anime">
+                                                	  <option value="">Select City</option>
+		                                      	   </select>
+									            </div>
+									        </div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label"> Pin Code :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="pincode">
+									            </div>  
+									        </div>  
+									    </div>
+									</div>
+	                  				
+	                               	 <div class="row mt-4">
+	                                	<div class="col-sm-6 col-md-4 col-lg-3">
+	                                    	<button type="submit" class="btn btn-info">ADD</button>
+	                                   	</div>
+	                              	</div>      
+	                                                                  
+	                        	</form> 
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>  
+	        </div>          
+		</section>
+	</div>
+	 <script language="javascript">print_state("sts");</script>
+        <script language="javascript">print_country("cty");</script>
+</body>
+
+<script>
+$("#Accountname").change(function(){
+	var Accountname = $('#Accountname').val();
+	$.ajax({
+		url: "[[@{/duplicaterefence}]]",
+        data: { name: Accountname},
+        success: function(data){
+        	if(data == 'true'){
+				alert("Account Name Already Available !");
+			}	
+        }
+	});
+});	
+</script>
+<script>
+$("#landscape").change(function(){
+					$('#landscapeinside').find('option').remove().end();
+					
+					var landscape = $('#landscape').val();
+					
+					$.ajax({
+						url:"[[@{/getlandscapeinsidedropdown}]]",
+						data:{
+							name: landscape
+						},
+						success:function(data){
+							
+							$.each(data,function(i,item){
+								$('#landscapeinside').append($('<option>',{
+									value:item.landscapesoftware,
+									text:item.landscapesoftware
+								}));
+							});
+						}
+					});
+				});
+</script> 
+</html>

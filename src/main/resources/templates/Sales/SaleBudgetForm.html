@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Create your Budget</title>
+		
+  		 <link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+        <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+        <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+        <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+        <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+        <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+        <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+        <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+        <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+        <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+        <script th:src="@{/dist/js/dextero.js}"></script>
+        <script th:src="@{/dist/js/all.js}"></script>
+            <!--date-->
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+		<script th:src="@{/chart js/cities.js}"></script>
+		<style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+	<!--<body>
+  	   <div class="wrapper">
+            <section class="content-header">
+                <div class="container-fluid">-->
+					
+<body class="hold-transition sidebar-mini layout-fixed">
+    <header th:include="header::header1"></header> 
+  	   	<div class="content-wrapper">
+            <section class="content-header">
+                <div class="container-fluid">
+                     <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-header text-center pb-2 d-bg-h2 ">
+                                <lable id="label" class="h2 font-weight-bold">Add Budget</lable>
+                            </div>
+                            <div class="card mt-5">
+                                <div class="card-body">
+                                    <form action="#" th:action="@{/sale/save}" method="POST" autocomplete="off" enctype="multipart/form-data"> 
+                                       <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									              <label class="d-label">From Date:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            <input class="form-control input-anime" type="date" name="annualfromdate" id="date1" placeholder="DD-MM-YYYY" >
+									           </div>
+									     	</div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label">To Date:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input class="form-control input-anime" type="date" name="annualtodate" id="date1" placeholder="DD-MM-YYYY" >
+									            </div>  
+									         </div>  
+									     </div>
+									     
+									  </div>
+                                        
+                                       
+                                        
+                                 <div class="row mt-4">
+									<div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+                                                <label class="d-label">Annual Budget:</label>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                                <input type="text" class="form-control input-anime" name="targetAmount" id="annualbudget" placeholder="Enter Annual Budget">
+			                                </div>
+                                        </div>
+                                        </div>
+                                </div>
+                                                  <br>
+                     <label for="chooseOption" class="d-label">Do you wish to define Quartly Budget:</label>
+		                   <select id="chooseOption" onchange="toggleFields()">
+						   <option value="no">No</option>
+						   <option value="yes">Yes</option>
+						</select>
+		
+		               
+                                      <div  id="additionalFields"  class="hidden">  
+                                      <div class="card-header text-center pb-2 d-bg-h2 mt-4">
+                                         <lable id="label" class="h2 font-weight-bold">Add Quaterly Budget</lable>
+                                      </div>
+                                        
+                                       
+                                        <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									              <label class="d-label">Quater1 From Date:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									           <input class="form-control input-anime" type="date" name="q1fdate" id="q1fdate" placeholder="DD-MM-YYYY" >
+									           </div>
+									     	</div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label">Quater1 To Date:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input class="form-control input-anime" type="date" name="q1tdate" id="q1tdate" placeholder="DD-MM-YYYY" >
+									            </div>  
+									         </div>  
+									     </div>
+									  </div>
+                                        
+                                        
+                                        <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									              <label class="d-label"> Quater2 From Date:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            <input class="form-control input-anime" type="date" name="q2fdate" id="q2fdate" placeholder="DD-MM-YYYY" >
+									           </div>
+									     	</div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label"> Quater2 To Date:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input class="form-control input-anime" type="date" name="q2tdate" id="q2tdate" placeholder="DD-MM-YYYY" >
+									            </div>  
+									         </div>  
+									     </div>
+									  </div>
+                                        
+                                       <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									              <label class="d-label">Quater3 From Date:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            <input class="form-control input-anime" type="date" name="q3fdate" id="q3fdate" placeholder="DD-MM-YYYY" >
+									           </div>
+									     	</div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label">Quater3 To Date:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input class="form-control input-anime" type="date" name="q3tdate" id="q3tdate" placeholder="DD-MM-YYYY" >
+									            </div>  
+									         </div>  
+									     </div>
+									  </div>
+                                        
+                                       <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									              <label class="d-label">Quater4 From Date:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            <input class="form-control input-anime" type="date" name="q4fdate" id="q4fdate" placeholder="DD-MM-YYYY" >
+									           </div>
+									     	</div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label">Quater4 To Date:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input class="form-control input-anime" type="date" name="q4tdate" id="q4tdate" placeholder="DD-MM-YYYY" >
+									            </div>  
+									         </div>  
+									     </div>
+									  </div>
+									  
+									    <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									              <label class="d-label"> Quater1 Percentage:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            <input class="form-control input-anime" type="text" name="q1perctange" id="q1perctange"  placeholder="Quater 1 Percentage">
+									           </div>
+									     	</div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label">Quater2 Percentage:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <input type="text" class="form-control input-anime" name="q2perctange" id="q2perctange" placeholder="Quater 2 Percentage">
+                                                </div>  
+									         </div>  
+									     </div>
+									  </div>
+									  
+									  <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									              <label class="d-label">Quater3 Percentage:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            <input type="text" class="form-control input-anime" name="q3perctange" id="q3perctange" placeholder="Quater 3 Percentage">
+                                                  
+									            </div>
+									     	</div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label">Quater4 Percentage:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="q4perctange" id="q4perctange" placeholder="Quater 4 Percentage">
+                                                  
+									            </div>  
+									         </div>  
+									     </div>
+									  </div>
+									  
+									  <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									              <label class="d-label"> Quater1 Value:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            <input class="form-control input-anime" type="text" name="q1value" id="q1value" placeholder="Value " >
+									           </div>
+									     	</div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label"> Quater2 Value:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input class="form-control input-anime" type="text" name="q2value" id="q2value" placeholder="Value" >
+									            </div>  
+									         </div>  
+									     </div>
+									  </div>
+									  
+									  <div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									              <label class="d-label"> Quater3 Value:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            <input class="form-control input-anime" type="text"  name="q3value" id="q3value" placeholder="Value" >
+									           </div>
+									     	</div>
+									    </div>
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6 ">
+									               <label class="d-label"> Quater4 Value:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input class="form-control input-anime" type="text" name="q4value" id="q4value" placeholder="Value" >
+									            </div>  
+									         </div>  
+									     </div>
+									  </div>
+									  
+									
+									  
+                                    </div>
+                                       <div class="row mt-4">
+	                                	<div class="col-sm-6 col-md-4 col-lg-3">
+	                                    	<button type="submit" class="btn btn-info mt-4">ADD</button>
+	                                   	</div>
+	                              	</div>        
+                                     <!-- <button type="submit" class="btn btn-info mt-4" >Add </button>      -->   
+                                    </form>  
+                                </div>    
+                            </div>
+                        </div>    
+                    </div>    
+                </div>
+            </section>   
+        </div>
+        <script>
+		    function toggleFields() {
+		        var chooseOption = document.getElementById("chooseOption");
+		        var additionalFields = document.getElementById("additionalFields");
+		
+		        if (chooseOption.value === "yes") {
+		            additionalFields.classList.remove("hidden");
+		        } else {
+		            additionalFields.classList.add("hidden");
+		        }
+		    }
+		</script>  
+        
+    </body>
+    <script>
+		$(document).ready(function(){
+			$('#q1perctange').val(0);
+			$('#q2perctange').val(0);
+			$('#q3perctange').val(0);
+			$('#q4perctange').val(0);
+		});	
+	</script>
+   <script>
+$("#q1perctange,#q2perctange,#q3perctange,#q4perctange").change(function(){
+	var q1p = parseFloat($('#q1perctange').val());
+	var q2p = parseFloat($('#q2perctange').val());
+	var q3p = parseFloat($('#q3perctange').val());
+	var q4p = parseFloat($('#q4perctange').val());
+	var annualbudget = parseFloat($('#annualbudget').val());
+	$('#q1value').val(annualbudget * (q1p/100));
+	$('#q2value').val(annualbudget * (q2p/100));
+	$('#q3value').val(annualbudget * (q3p/100));
+	$('#q4value').val(annualbudget * (q4p/100));
+	var num = q1p + q2p + q3p + q4p;				
+	if(num == 100){
+		
+	}
+	else{
+		alert("Percentage : " + (100-num) + " Rem.");
+	}				
+});
+</script>
+</html>

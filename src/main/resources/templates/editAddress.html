@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<title>Edit Address</title>
+		<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+        <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+        <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+        <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+        <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+        <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+
+        <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+        <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+        <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+        <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+        <script th:src="@{/dist/js/dextero.js}"></script>
+        <script th:src="@{/dist/js/all.js}"></script>
+    	<script th:src="@{/chart js/cities.js}"></script>
+	
+</head>
+	<body class="hold-transition sidebar-mini layout-fixed">
+		<header th:include="header::header1"></header> 
+		<div class="content-wrapper">
+	        <section class="content-header">
+	            <div class="container-fluid">
+	                <div class="row">
+	                    <div class="col-lg-12">
+	                        <div class="card-header text-center pb-2 d-bg-h2 ">
+	                            <lable id="label" class="h2 font-weight-bold">Edit Address Details</lable>
+	                        </div>
+	                        <div class="card card-box-new tech-x-card-2 mt-5">
+	                            <div class="card-body">
+                               		<form action="#" class="form-horizontal" th:action="@{/save/address}" th:object="${addressDetails}"  method="POST" autocomplete="off">
+	                                		<input type="hidden" th:field="*{id}">
+                                        		<div class="row mt-4">
+                                                	<div class="col-sm-4 col-lg-4">
+                                                    	<label class="d-label">Address :</label>
+                                                  	</div>
+                                                    <div class="col-sm-6 col-md-4 col-lg-4">
+                                                 		<input type="text" th:field="*{PresentAddress1}" id="line1" placeholder="Address Line 1" class="form-control input-anime">
+                                                        <input type="text" th:field="*{PresentAddress2}" id="line2" placeholder="Address Line 2" class="form-control input-anime mt-4">
+                                              		</div>
+                                             	</div>
+                                              	<div class="row mt-4">
+                                                	<div class="col-sm-4 col-lg-4">
+                                                		<label class="d-label">Country :</label>
+                                             		</div>
+                                               		<div class="col-sm-6 col-md-4 col-lg-3">
+                                              			<select class="form-control input-anime" th:field="*{country}" onchange="print_state('country', this.selectedIndex);" id="cty" name ="cty">
+			                                        		<option th:value="*{country}" th:text="*{country}" selected>
+			        									</select>
+                                                   	</div>
+                                               	</div>
+                                                <div class="row mt-4">
+                                                	<div class="col-sm-4 col-lg-4">
+                                               			<label class="d-label">State :</label>
+                                                 	</div>
+                                               		<div class="col-sm-6 col-md-4 col-lg-3">
+                                                    	<select th:field="*{state}" id="country" onchange="print_city('state', this.selectedIndex);" name ="country" class="form-control input-anime">
+                                                       		<option th:value="*{state}" th:text="*{state}" selected>
+                                                  		</select>
+                                                	</div>
+                                             	</div>
+                                                <div class="row mt-4">
+                                            		<div class="col-sm-4 col-lg-4">
+                                                		<label class="d-label">City :</label>
+                                               		</div>
+                                                	<div class="col-sm-6 col-md-4 col-lg-3">
+                                                		<select th:field="*{city}" name="state" id ="state" class="form-control input-anime">
+                                                     		<option th:value="*{city}" th:text="*{city}" selected>
+		                                          		</select>
+                                                  	</div>
+                                              	</div>
+                                                <div class="row mt-4">
+                                               		<div class="col-sm-4 col-lg-4">
+                                                    	<label class="d-label">Pin Code</label>
+                                                    </div>
+                                             		<div class="col-sm-6 col-md-4 col-lg-2">
+                                                		<input type="text" th:field="*{pinCode}" id="pin code" placeholder="Pin Code" class="form-control input-anime">
+                                              		</div>
+                                           		</div>
+                                              	<div class="row mt-4 ">
+			                                        <div class="col-sm-4 col-md-4 col-lg-2">
+			                                            <button type="submit" class="btn btn-info ">Save</button>
+			                                        </div> 
+	                                     		</div> 
+										</form>
+                                	</div>
+                            	</div>
+                        	</div>
+                    	</div>
+                	</div>
+            </section>
+        </div>
+	</body>
+         <script language="javascript">print_state("sts");</script>
+        <script language="javascript">print_country("cty");</script>
+</html>

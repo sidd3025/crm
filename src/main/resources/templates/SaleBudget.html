@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+   	<title>Home</title>
+		<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+		<link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+		<link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+		<link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+		<link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+		<link rel="stylesheet" th:href="@{/dist/css/all.css}">
+	
+		<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+		<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+		<script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+		<script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+		<script th:src="@{/dist/js/dextero.js}"></script>
+		<script th:src="@{/dist/js/all.js}"></script>	    
+                <!-- date -->
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script th:src="@{/chart js/Chart.js}"></script>
+        <style>
+            tfoot td {
+                font-weight: bold;
+            }
+	         .tech-x-card-2:hover{
+	            box-shadow: 5px 4px 10px grey;
+	            transition-timing-function: ease-in-out;
+	            transition:0.5s;
+	          }
+       </style>
+</head>
+    <body class="hold-transition sidebar-mini layout-fixed">
+    	<header th:include="header::header1"></header> 
+         <div class="content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+					 <div class="col-sm-12">
+						 <div class="card card-box-new bg-white border tech-x-card-2 mt-2" style="border-radius: 15px;"> 
+                            <div class="card-header">
+                                <div class="card-title"> <h5 class="font-weight-bold">Todays Task</h5></div>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool"
+                                        data-card-widget="collapse">
+                                        <i class="fas fa-minus text-dark"></i>
+                                    </button>
+                                </div>
+                            </div>  
+                            <div class="card-body">
+					<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.canvasjs.com/jquery.canvasjs.min.js"></script>
+                </div>
+                </div>
+</div>                </div>
+
+            </div>
+        </div>  
+    </body>
+    <script>
+window.onload = function () {
+	
+	$.ajax({
+    	url: "[[@{/crm-portal/home/chart/charts}]]",
+        success: function (data) {
+			//Better to construct options first and then pass it as a parameter
+			
+			var options = {
+	animationEnabled: true,
+	theme: "dark1", //"light1", "dark1", "dark2"
+	title:{
+		text: "Booking Details"             
+	},
+	axisY:{
+		interval: 10,
+		suffix: "%"
+	},
+	toolTip:{
+		shared: true
+	},
+	data:[{
+		type: "stackedBar100",
+		toolTipContent: "{label}<br><b>{name}:</b> {y} (#percent%)",
+		showInLegend: true, 
+		name: "target",
+		dataPoints: [
+			{ y: data[0], label: "JAN"},
+			{ y: data[2], label: "FEB"},
+			{ y: data[4], label: "MAR"},
+			{ y: data[6], label: "APR"},
+			{ y: data[8], label: "MAY "},
+			{ y: data[10], label: "JUN"}
+		]
+	},
+	{
+		type: "stackedBar100",
+		toolTipContent: "<b>{name}:</b> {y} (#percent%)",
+		showInLegend: true, 
+		name: "estimate",
+		dataPoints: [
+		{ y: data[1], label: "JAN"},
+			{ y: data[3], label: "FEB"},
+			{ y: data[5], label: "MAR"},
+			{ y: data[7], label: "APR"},
+			{ y: data[9], label: "MAY "},
+			{ y: data[11], label: "JUN"}
+		]
+	}]
+};
+
+
+$("#chartContainer").CanvasJSChart(options);
+		}
+	});
+}
+</script>
+</html>    

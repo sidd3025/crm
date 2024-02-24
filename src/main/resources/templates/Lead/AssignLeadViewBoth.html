@@ -1,0 +1,452 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Lead</title>
+	<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+    <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+    <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/dist/js/dextero.js}"></script>
+    <script th:src="@{/dist/js/all.js}"></script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<header th:include="header::header1">
+	</header> 
+	<div class="content-wrapper">
+		<section class="content-header">
+	    	<div class="container-fluid">
+	        	<div class="row">
+	            	<div class="col-lg-12">
+	                	<div class="card-header text-center pb-2 d-bg-h2 ">
+	                    	<label id="label" class="h2 font-weight-bold">Add Lead</label>
+	                  	</div>
+	                    <div class="card mt-5">
+	                    	<div class="card-body">
+	                        	<form action="#" th:action="@{/lead/doc/save1}" th:object="${lead}" method="POST" autocomplete="off">
+	                        	  <input type="hidden" th:value="${id}" name="contact_id">
+	                        	 <!--<input type="hidden" th:field="*{id}">-->
+	                        	<!--  <input type="hidden" th:field="*{employee_id}"-->
+	                        		
+	                        		
+	                        		<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									                <label class="d-label">Lead Owner:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									            
+									            <h5 class=""  th:each="a : ${employee}" th:field="*{leadowner}" th:value="${a.firstname + ' ' + a.lastname}" th:text="${a.firstname + ' ' + a.lastname}"  ></h5>
+									      	  </div>
+									     	</div>
+									   </div>
+									  <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Lead Name :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+													 <h5 class="" th:each="l : ${lead}" th:value="${l.leadname}" th:text="${l.leadname}"></h5>
+                                                </div>
+									        </div>
+									    </div> 
+									</div>
+									
+									
+									
+									
+	                        		<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+													<label class="d-label">Account Name :</label>
+													</div>
+													<div class="col-sm-6 col-md-4 col-lg-6">
+									                 <h5 class="" th:each="l : ${lead}" th:value="${l.accountname}" th:text="${l.accountname}"></h5>
+									               </div>
+									           </div>
+									        </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									             <div class="col-sm-6 col-lg-6">
+													 <label class="d-label">Title :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <!-- <input type="text" class="form-control input-anime" name="Title">-->
+									                <h5 class="" th:each="l : ${lead}" th:value="${l.title}" th:text="${l.title}"></h5>
+									                
+									            </div>
+									        </div>  
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+													<label class="d-label">Lead Stage :</label>
+													</div>
+													<div class="col-sm-6 col-md-4 col-lg-6">
+									                 <h5 class="" th:each="l : ${lead}" th:value="${l.stagestatus}" th:text="${l.stagestatus}"></h5>
+									               </div>
+									           </div>
+									        </div>
+									    
+									   <!-- <div class="col-sm-6">
+									        <div class="row">
+									             <div class="col-sm-6 col-lg-6">
+													 <label class="d-label">Product :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                <input type="text" class="form-control input-anime" name="Title">
+									                <h5 class="" th:each="l : ${lead}" th:value="${l.product}" th:text="${l.product}"></h5>
+									                
+									            </div>
+									        </div>  
+									    </div>-->
+									</div>
+									
+									    <div class="row mt-4">
+										  <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+									               <label class="d-label">First Name :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                 <h5  class=""  th:each="l : ${lead}" th:value="${l.firstname}" th:text="${l.firstname}"></h5>
+									            </div>
+									          </div>  
+									      </div>
+									   
+									     <div class="col-sm-6">
+									        <div class="row">
+												
+												<div class="col-sm-6 col-lg-6">
+												  <label class="d-label">Last Name :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <!-- <input type="text" class="form-control input-anime" name="Lastname">-->
+									                  <h5 class="" th:each="l : ${lead}" th:value="${l.lastname}" th:text="${l.lastname}"></h5>
+									            </div>  
+									          </div>  
+									       </div>
+									     </div>
+									
+									<div class="row mt-4">
+										 <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+												   <label class="d-label">Email :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <!-- <input type="text" class="form-control input-anime" name="Email">-->
+									                <h5 class="" th:each="l : ${lead}" th:value="${l.email}" th:text="${l.email}"></h5>
+									            </div>  
+									        </div>
+									    </div>
+										
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													 <label class="d-label">Phone Number 1:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <!-- <input type="text" class="form-control input-anime" name="Title">-->
+									                <h5 class="" th:each="l : ${lead}" th:value="${l.title}" th:text="${l.title}"></h5>
+									            </div>
+											</div>
+									    </div>
+							          </div> 
+									
+									
+									<div class="row mt-4">
+									 <div class="col-sm-6">
+									   <div class="row">
+									       <div class="col-sm-4 col-lg-4">
+											    <label class="d-label">Phone Number 2:</label>
+									       </div>
+									       <div class="col-sm-6 col-md-4 col-lg-6">
+									             <h5 class="" th:each="l : ${lead}" th:value="${l.phone}" th:text="${l.phone}"></h5>
+									        </div>
+										  </div>
+										</div>
+										
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Lead Source</label>
+	                                   			</div>
+			                                    <div class="col-sm-6 col-md-6 col-lg-6">
+												  <h5 class="" th:each="l : ${lead}" th:value="${l.leadsource}" th:text="${l.leadsource}"></h5>
+												</div>
+											 </div>
+									    </div>
+									</div>
+									
+									<div class="row mt-4">
+										 <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+												   <label class="d-label">Mobile Number 1 :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									              <!-- <input type="text" class="form-control input-anime" name="Email">-->
+									                <h5 class="" th:each="l : ${lead}" th:value="${l.mobile1}" th:text="${l.mobile1}"></h5>
+									            </div>  
+									        </div>
+									    </div>
+										
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													 <label class="d-label">Mobile Number 2:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <!-- <input type="text" class="form-control input-anime" name="Title">-->
+									                <h5 class="" th:each="l : ${lead}" th:value="${l.mobile2}" th:text="${l.mobile2}"></h5>
+									            </div>
+											</div>
+									    </div>
+							          </div> 
+									
+									<div class="row mt-4">
+										<div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+													 <label class="d-label">Industry:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+														 <h5 class="" th:each="l : ${lead}" th:value="${l.industry}" th:text="${l.industry}"></h5>   
+									              <!--   <select class="form-control input-anime" name="LeadStatus">
+											         <option th:each="a : ${StatusList}" th:value="${a.leadstatus}" th:text="${a.leadstatus}"></option>
+											         </select>-->
+									            </div>
+													
+									              
+									        </div>  
+									    </div>
+											
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													
+													  <label class="d-label">No.of Employee:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+													 <h5 class="" th:each="l : ${lead}" th:value="${l.noofemployee}" th:text="${l.noofemployee}"></h5> 
+									             <!--  <select class="form-control input-anime" name="Industry">
+											       <option th:each="a : ${IndustryMasterList}" th:value="${a.Industry}" th:text="${a.Industry}"></option>
+											       </select>-->
+									            </div>  
+									            
+									                
+									     </div>
+									 </div>
+									    
+									</div>
+									
+									<div class="row mt-4">
+	          							<div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+													<label class="d-label">Annual Revenue:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+													 <h5 class="" th:each="l : ${lead}" th:value="${l.annualrevenue}" th:text="${l.annualrevenue}"></h5> 
+													
+									                  <!-- <select class="form-control input-anime" name="NoofEmployee">
+											         <option th:each="a : ${EmployeeList}" th:value="${a.emp}" th:text="${a.emp}"></option>
+											         </select>-->
+									            </div>
+													
+									               
+									        </div>  
+									    </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													 <label class="d-label">Secoundary Email:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									            <h5 class="" th:each="l : ${lead}" th:value="${l.secoundaryemail}" th:text="${l.secoundaryemail}"></h5>
+									           
+									             <!--  <input type="text" class="form-control input-anime" name="AnnualRevenue">-->
+									               <!-- <select class="form-control input-anime" name="AnnualRevenue">
+											         <option th:each="a : ${AnnualList}" th:value="${a.annual_revenu}" th:text="${a.annual_revenu}"></option>
+											         </select>-->
+									            </div>  
+													
+									               
+									        </div>
+									    </div>
+									    
+									</div>
+	                        	
+	                                <div class="row mt-4">
+										<div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-4 col-lg-4">
+													 <label class="d-label">Skype ID:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-4 col-lg-6">
+									                  <h5 class="" th:each="l : ${lead}" th:value="${l.skypeid}" th:text="${l.skypeid}"></h5> 
+									            </div>
+													
+									                
+									        </div>  
+									    </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Twitter :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									               <h5 class="" th:each="l : ${lead}" th:value="${l.twitter}" th:text="${l.twitter}"></h5>
+									            </div>  
+											 </div>
+									    </div>
+								    </div>
+								 
+								    <div class="row mt-4">
+								       <div class="col-sm-6">
+									      <div class="row">
+									         <div class="col-sm-4 col-lg-4">
+												<label class="d-label"> Fax:</label>
+									         </div>
+									         <div class="col-sm-6 col-md-4 col-lg-6">
+									            <h5 class="" th:each="l : ${lead}" th:value="${l.fax}" th:text="${l.fax}"></h5>
+									         </div>
+									       </div>  
+									    </div>
+									       <div class="col-sm-6">
+									        <div class="row">
+									            <div class="col-sm-6 col-lg-6">
+													<label class="d-label">Lead Status</label>
+									            </div>
+									             <div class="col-sm-6 col-md-4 col-lg-6">
+									                <h5 class="" th:each="l : ${lead}" th:value="${l.leadstatus}" th:text="${l.leadstatus}"></h5>
+									             </div>
+											 </div>
+									    </div>
+									  </div>
+									  
+									   <div class="row mt-4">
+								       <div class="col-sm-6">
+									      <div class="row">
+									         <div class="col-sm-4 col-lg-4">
+												<label class="d-label"> Probability:</label>
+									         </div>
+									         <div class="col-sm-6 col-md-4 col-lg-6">
+									            <h5 class="" th:each="l : ${lead}" th:value="${l.probablility}" th:text="${l.probablility}"></h5>
+									         </div>
+									       </div>  
+									    </div>
+									    
+									   <div class="col-sm-6">
+									        <div class="row">
+									             <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Amount:</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                 <!--   <input type="text" class="form-control input-anime" name="type"> -->
+									               <h5 class="" th:each="l : ${lead}" th:value="${l.amount}" th:text="${l.amount}"></h5>
+									         </div>
+									        </div>  
+									    </div>
+									 </div>
+									 
+									 <div class="row mt-4">
+								       <div class="col-sm-6">
+									      <div class="row">
+									         <div class="col-sm-4 col-lg-4">
+												<label class="d-label">Documnet :</label>
+									         </div>
+									         <div class="col-sm-6 col-md-4 col-lg-6">
+									           <a th:href="@{'https://actifylms.blob.core.windows.net/product-resources/'}"  ></a>
+									         </div>
+									       </div>  
+									    </div>
+									    
+									    <div class="col-sm-6">
+									        <div class="row">
+									             <div class="col-sm-6 col-lg-6">
+									                <label class="d-label">Document approval :</label>
+									            </div>
+									            <div class="col-sm-6 col-md-6 col-lg-6">
+									                 <!--   <input type="text" class="form-control input-anime" name="type"> -->
+									                 <select class="form-control input-anime" name="approval">
+													 <option value="Pending"></option>
+													  <option value="Approved">Approved</option>
+													  <option value="Reject">Reject</option>
+													  </select>													  
+									            </div>
+									        </div>  
+									    </div>
+									 </div>
+									 
+									  <div class="row mt-4">
+								        <div class="col-sm-6">
+									      <div class="row">
+									         <div class="col-sm-4 col-lg-4">
+												<label class="d-label">Lead Remarks :</label>
+									         </div>
+									         <div class="col-sm-6 col-md-4 col-lg-6">
+									           <div style="    width: 60vw;
+    height: 15vh;
+    padding: 0.5rem 0.7rem;
+    overflow: auto;
+    background: #f1f1f1;
+    border-radius: 5px;">
+									                <p class="" th:each="c : ${remark}" th:value="${c.leadstatus+' '+ c.currentdate+' '+c.remarks}" th:text="${c.leadstatus+' '+ c.currentdate+' '+c.remarks}"  ></p>
+									                 </div>
+									       </div>  
+									    </div>
+									  </div>
+								  </div>
+									 
+								 <!-- <div class="row mt-4">
+								       <div class="col-sm-12">
+									      <div class="row">
+											    pdf type for blob 
+                                             for same but not in iframe  
+                                           <h5 class="" th:each="l : ${lead}" th:value="${l.readingmaterial}" th:text="${l.readingmaterial}"></h5>
+									       
+                                    	<a th:href="@{'https://actifylms.blob.core.windows.net/product-resources/'}"  ></a>
+											  </div>
+										 
+										 </div>
+									   </div>-->
+								</div>
+									    
+	                               	 <div class="row mt-4">
+	                                	<div class="col-sm-6 col-md-4 col-lg-3">
+	                                    	<button type="submit" class="btn btn-info">Save</button>
+	                                   	</div>
+	                              	</div>   
+	                                                                  
+	                        	</form>
+	                        	 <div class="row mt-4"> 
+	                              		<a th:href="@{/leadlist}">Back to List</a>
+	                             </div> 
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>  
+	        </div>          
+		</section>
+	</div>
+</body> 
+</html>

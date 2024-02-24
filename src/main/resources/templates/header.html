@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>	
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    	<link rel="icon" th:href="@{/dist/images/Dextero_Icon.ico}" type="image/x-icon" />
+        <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" rel="stylesheet" />
+        <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}"/>
+        <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}" />
+        <link rel="stylesheet" th:href="@{/dist/css/dextero.css}">
+        <link rel="stylesheet" th:href="@{/dist/css/all.css}">
+
+        <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+        <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+        <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+        <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+        <script th:src="@{/dist/js/dextero.js}"></script>
+        <script th:src="@{/dist/js/all.js}"></script>
+</head>
+	<body>
+		<header th:fragment="header1">
+			<div class="wrapper">
+			        <!-- Navbar -->
+		        <nav class="main-header navbar navbar-static-top navbar-expand navbar-white navbar-light">
+		            <!-- Left navbar links -->
+		            <ul class="navbar-nav">
+		                <li class="nav-item">
+		                    <a class="nav-link" data-widget="pushmenu" href=""><i class="fas fa-bars" style="color: #0D3978"></i>
+		                    </a>
+		                </li>
+		                    <a class="nav-link" data-toggle="dropdown" href="">
+		                        <i class="fas fa-plus-circle" style="color: #0D3978"></i>
+		                    </a>
+		
+		                    <!-- <div class="dropdown-menu dropdown-menu-md dropdown-menu-left">
+		
+		                        <a href="../../SupplierPortal/Admin/Register/register-group-company.html" class="dropdown-item">
+		                            <i class="fas fa-edit mr-2"></i> New Company
+		                        </a>
+		
+		                        <div class="dropdown-divider"></div>
+		                        <a href="../../SupplierPortal/Admin/Register/user-register.html" class="dropdown-item">
+		                            <i class="fas fa-user-edit mr-2"></i> New User
+		                        </a>
+		
+		                        <div class="dropdown-divider"></div>
+		                        <a href="../../SupplierPortal/Admin/Register/supplier-register.html" class="dropdown-item">
+		                            <i class="fas fa-user-edit mr-2"></i> New Supplier
+		                        </a>
+		
+		                    </div> -->
+		                </li> 
+		            </ul>
+		
+		            <!-- Right navbar links -->
+		            <ul class="navbar-nav ml-auto">
+		
+		                <!-- Portal Dropdown Menu -->
+		                <li class="nav-item dropdown">
+		                    <a class="nav-link" data-toggle="dropdown" href="">
+		                            <i class="fas fa-plus" style="color: #0D3978;"></i>
+		                    </a>
+		
+		                    <!-- <div class="dropdown-menu dropdown-menu-one dropdown-menu-sm dropdown-menu-right">
+		                        <a href="#" class="dropdown-item dropdown-header">Create</a>
+		                        <div class="dropdown-divider"></div>
+		                        <a href="../../SupplierPortal/Admin/Setting/supplier-type.html" class="dropdown-item text-center">
+		                          Quote
+		                        </a>
+		                        <a href="" data-toggle="modal" data-target=".bd-example-modal-lg" class="dropdown-item text-center">
+		                            Shipment
+		                         </a>
+		
+		                         <a href="../../SupplierPortal/Admin/Setting/supplier-type.html" class="dropdown-item text-center">
+		                            Customer
+		                         </a>
+		                         <a href="../../SupplierPortal/Admin/Setting/supplier-type.html" class="dropdown-item text-center">
+		                            Factor
+		                         </a>
+		                         <a href="../../SupplierPortal/Admin/Setting/supplier-type.html" class="dropdown-item text-center">
+		                           Carrier
+		                         </a>
+		                         <a href="../../SupplierPortal/Admin/Setting/supplier-type.html" class="dropdown-item text-center">
+		                            Contact
+		                         </a>
+		                         <a href="../../SupplierPortal/Admin/Setting/supplier-type.html" class="dropdown-item text-center">
+		                            Location
+		                         </a>
+		                         <a href="../../SupplierPortal/Admin/Setting/supplier-type.html" class="dropdown-item text-center">
+		                            Company
+		                         </a>
+		                         <a href="../../SupplierPortal/Admin/Setting/supplier-type.html" class="dropdown-item text-center">
+		                            Group
+		                         </a>
+		                         <a href="../../SupplierPortal/Admin/Setting/supplier-type.html" class="dropdown-item text-center">
+		                            User
+		                         </a>
+		                    </div>
+		
+		                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+		                        <div class="dropdown-divider"></div>
+		                        <a href="../../SupplierPortal/Admin/Setting/supplier-type.html" class="dropdown-item">
+		                            <i class="fas fa-user mr-2"></i> Supplier Type
+		                        </a>
+		                        <a href="../../SupplierPortal/Admin/Setting/supplier-status.html" class="dropdown-item">
+		                            <i class="fas fa-user mr-2"></i> Supplier Status
+		                        </a>
+		
+		                        <div class="dropdown-divider"></div>
+		                        <a href="../../SupplierPortal/Admin/Setting/invoice-stage.html" class="dropdown-item">
+		                            <i class="fas fa-copy mr-2"></i> Invoice Stage
+		                        </a>
+		                    </div>
+		 -->
+		                </li>
+		
+		                <li class="nav-item dropdown">
+		                    <a class="nav-link" data-toggle="dropdown" href="">
+		                    	<i class="fas fa-comments" style="color: #0D3978;"></i>
+		                    </a>
+		
+		<!--                     <div class="dropdown-menu dropdown-menu-two dropdown-menu-xl  dropdown-menu-right">
+		                        <a href="#" class="dropdown-item dropdown-header">Messages</a>
+		                        <div class="dropdown-divider"></div>
+		                        <a href="#" class="dropdown-item">
+		                            Message Start
+		                            <div class="media">
+		                                <img src="dist/images/u2.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+		                                <div class="media-body">
+		                                    <h3 class="dropdown-item-title">
+		                                    Abhishek Ingle
+		                                        <p class="float-right text-sm">Jun 19</p>
+		                                    </h3>
+		                                    
+		                                    <p class="text-sm text-muted">Hey,abhishek!</p>
+		                                </div>
+		                            </div>
+		                            Message End
+		                        </a>
+		                        <a href="#" class="dropdown-item">
+		                            Message Start
+		                            <div class="media">
+		                                <img src="dist/images/u1.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+		                                <div class="media-body">
+		                                    <h3 class="dropdown-item-title">
+		                                     Devang
+		                                        <p class="float-right text-sm">Jun 19</p>
+		                                    </h3>
+		                                    
+		                                    <p class="text-sm text-muted">Hey,devang!</p>
+		                                </div>
+		                            </div>
+		                            Message End
+		                        </a>
+		
+		                        <div class="dropdown-divider"></div>
+		                        <a href="#" class="dropdown-item">
+		                            Message Start
+		                            <div class="media">
+		                                <img src="dist/images/u3.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+		                                <div class="media-body">
+		                                    <h3 class="dropdown-item-title">
+		                                        shilpa
+		                                        <p class="float-right text-sm">Jun 19</p>
+		                                    </h3>
+		                                    
+		                                    <p class="text-sm text-muted">Hey,devang!</p>
+		                                </div>
+		                            </div>
+		                            Message End
+		                        </a>
+		                        <div class="dropdown-divider"></div>
+		                        <a href="#" class="dropdown-item">
+		                            Message Start
+		                            <div class="media">
+		                                <img src="dist/images/u2.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+		                                <div class="media-body">
+		                                    <h3 class="dropdown-item-title">
+		                                    Abhishek Ingle
+		                                        <p class="float-right text-sm">Jun 19</p>
+		                                    </h3>
+		                                    
+		                                    <p class="text-sm text-muted">Hey,abhishek!</p>
+		                                </div>
+		                            </div>
+		                            Message End
+		                        </a>
+		                        <div class="dropdown-divider"></div>
+		                        <a href="#" class="dropdown-item">
+		                            Message Start
+		                            <div class="media">
+		                                <img src="dist/images/u3.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+		                                <div class="media-body">
+		                                    <h3 class="dropdown-item-title">
+		                                        Devang
+		                                        <p class="float-right text-sm">Jun 19</p>
+		                                    </h3>
+		                                    
+		                                    <p class="text-sm text-muted">Hey,devang!</p>
+		                                </div>
+		                            </div>
+		                            Message End
+		                        </a>
+		                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+		                    </div> -->
+		                </li>
+		
+		
+		                <!-- Setting Dropdown Menu -->
+		                <li class="nav-item dropdown">
+		                   <a class="nav-link" data-toggle="dropdown" href="">
+		                  		<i class="fas fa-bell" style="color: #0D3978;"></i>
+		                   </a>
+		
+		<!--                     <div class="dropdown-menu dropdown-menu-four dropdown-menu-xl dropdown-menu-right">
+		                        <a href="#" class="dropdown-item dropdown-header">Notifacation</a>
+		                        <div class="dropdown-divider"></div>
+		                        <h6 class="bg-light ml-4 mt-1">Today</h6>
+		                        <a href="#" class="dropdown-item">
+		                            Message Start
+		                            <div class="media">
+		                                <img src="dist/images/mu2.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+		                                <div class="media-body">
+		                                    <h3 class="dropdown-item-title">
+		                                        Bluehill Farm
+		                                    </h3>                                    
+		                                    <p class="mt-1 text-sm">shipment running 16m late en route P&G DC 101 EN route</p>
+		                                </div>
+		                            </div>
+		                            Message End
+		                        </a>
+		                        <div class="dropdown-divider"></div>
+		                        <h6 class="bg-light ml-4 mt-1">19 Jun</h6>
+		                        <a href="#" class="dropdown-item">
+		                            Message Start
+		                            <div class="media">
+		                                <img src="dist/images/check.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+		                                <div class="media-body">
+		                                    <h3 class="dropdown-item-title">
+		                                        Check on #201080606-52A6A
+		                                        <p class=" mt-1 text-sm">Envision #20180606-200</p>
+		                                    </h3>    
+		                                    <p class="text-sm text-muted">Your task is deu in 30 mins</p>
+		                                </div>
+		                            </div>
+		                            Message End
+		                        </a>
+		
+		                        <div class="dropdown-divider"></div>
+		                        <h6 class="bg-light ml-4 mt-1">23 Jun</h6>
+		                        <a href="#" class="dropdown-item">
+		                            Message Start
+		                            <div class="media">
+		                                <img src="dist/images/check.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+		                                <div class="media-body">
+		                                    <h3 class="dropdown-item-title">
+		                                        Call Driver
+		                                        <p class=" mt-1 text-sm">Envision #20180606-200</p>
+		                                    </h3>    
+		                                    <p class="text-sm text-muted">Your task is deu in 30 mins</p>
+		                                </div>
+		                            </div>
+		                            Message End
+		                        </a>
+		                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+		                    </div> -->
+		                </li>
+		
+		                <!-- Profile Dropdown Menu -->
+		                <li class="nav-item dropdown">
+		                    <a class="nav-link" data-toggle="dropdown" href="">
+		               			<i class="fas fa-user-circle" style="color: #0D3978;"></i>
+		               		</a>
+		                    <div class="dropdown-menu dropdown-menu-three dropdown-menu-md dropdown-menu-right">
+		                        <a href="" class="dropdown-item">
+		                            <div class="media">
+		                                <img th:src="@{/dist/images/user-profile.jpg}" alt="User Avatar"
+		                                    class="img-size-50 mr-3 img-circle">
+		                                <div class="media-body">
+		                                    &nbsp;
+		                                    <h3 class="dropdown-item-title">
+		                                       <b><span>[[${#httpServletRequest.remoteUser}]]</span></b>
+		                                    </h3>
+		                                </div>
+		                            </div>
+		                        </a>
+		                        <div class="dropdown-divider">
+		                        </div>
+		                        <!-- <div class="text-center" th:each="a,a1:${listMainsidebarAuthority}" th:unless="${a1.index > 0}" th:if="${a.authorityid}=='2'">
+		                        	<a th:href="@{/showFormForUpdate}">Personal Details</a>
+		                        </div> -->
+		                        <div class="text-center" th:each="a,a1:${listMainsidebarAuthority}" th:unless="${a1.index > 0}" th:if="${a.authorityid}=='3'">
+		                        	<a th:href="@{/showFormForUpdate}">Personal Details</a>
+		                        </div>
+		                       	<div class="text-center" th:each="a,a1:${listMainsidebarAuthority}" th:unless="${a1.index > 0}" th:if="${a.authorityid}=='4'">
+		                        	<a th:href="@{/showFormForUpdate}">Personal Details</a>
+		                        </div>
+		                        <div class="text-center" th:each="a,a1:${listMainsidebarAuthority}" th:unless="${a1.index > 0}" th:if="${a.authorityid}=='5'">
+		                        	<a th:href="@{/showFormForUpdate}">Personal Details</a>
+		                        	<!-- <a th:href="@{/ViewEmployeeDetails}">Personal Details</a> -->
+		                        </div>
+		                        <div class="text-center" th:each="a,a1:${listMainsidebarAuthority}" th:unless="${a1.index > 0}" th:if="${a.authorityid}=='6'">
+		                        	<a th:href="@{/showFormForUpdate}">Personal Details</a>
+		                        </div>
+		                       
+		                            <a th:href="@{/login}" class="dropdown-item">
+		                                <button type="submit" class="btn btn-primary"><i class="fas fa-sign-out-alt"
+		                                        aria-hidden="true" style="width:50px"></i></button>
+		                            </a>
+		                        <div class="dropdown-divider">
+		                        </div>
+		                    </div>
+		                </li>
+		            </ul>
+		        </nav>
+		
+		        <aside class="main-sidebar sidebar-light-primary elevation-4" th:fragment="sidebar_list(listMainsidebarAuthority)">
+					<a href="" class="brand-link"> <img th:src="@{/dist/images/Dextero_Logo.png}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> 
+					<span class="brand-text text-dark font-weight-bold">CRM Portal</span> </a>
+					<!-- Sidebar -->
+					<div class="sidebar">
+						<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+							<div class="image"> <img th:src="@{/dist/images/user-profile.jpg}" class="img-circle elevation-2" alt="User Image"> </div>
+							<div class="info"> <a href="" class="d-block"><span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span></a></div>
+						</div>
+						
+						<nav class="mt-2">
+		                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+		                        
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '1' AND ${a.status} == 'true'">
+		                            <a th:href="@{/AdminHome}" class="nav-link">
+		                                <i class="fa-solid fa-house mr-2"></i>
+		                                <p>Home</p>
+		                            </a>
+		                        </li>
+		                        
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '2' AND ${a.status} == 'true'">
+		                            <a th:href="@{/UserHome}" class="nav-link">
+		                                <i class="fa-solid fa-house mr-2"></i>
+		                                <p>Home</p>
+		                            </a>
+		                        </li>
+		                        
+		                       <!-- <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '11' AND ${a.status} == 'true'">
+		                            <a th:href="@{/accountlist}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Accounts</p>
+		                            </a>
+		                        </li>-->
+		                        
+		                        <!-- <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '10' AND ${a.status} == 'true'">
+		                            <a th:href="@{/contactlist}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Contacts</p>
+		                            </a>
+		                        </li>-->
+		                        
+		                       
+		                        
+		                         
+		                        
+		                        <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '52' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Accounts<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+										 <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '11' AND ${a.status} == 'true'">
+		                            <a th:href="@{/accountlist}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Accounts</p>
+		                            </a>
+		                              </li>
+		                              
+		                               <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '17' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlistaccount}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Account Report</p>
+		                            </a>
+		                        </li>
+		                        
+		                          <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '18' AND ${a.status} == 'true'">
+		                            <a th:href="@{/accountreportlistadmin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Account Report</p>
+		                            </a>
+		                        </li>
+		                         <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '23' AND ${a.status} == 'true'">
+		                            <a th:href="@{/accountexcelupload}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Account Excel Upload</p>
+		                            </a>
+		                        </li>
+		                              
+		                              
+									</ul>
+		                        </li>	
+		                        
+		                        <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '53' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Contacts<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+										 <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '10' AND ${a.status} == 'true'">
+		                            <a th:href="@{/contactlist}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Contacts</p>
+		                            </a>
+		                                </li>
+		                                
+		                                 <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '29' AND ${a.status} == 'true'">
+		                            <a th:href="@{/contactreportlistadmin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Contact Report</p>
+		                            </a>
+		                        </li> 
+		                        
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '22' AND ${a.status} == 'true'">
+		                            <a th:href="@{/contactexcelupload}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Contact Excel Upload</p>
+		                            </a>
+		                        </li>
+									</ul>
+		                        </li>	
+		                        
+		                        <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '54' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Leads<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+										 <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '3' AND ${a.status} == 'true'">
+		                            <a th:href="@{/leadlist}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Lead</p>
+		                            </a>
+		                              </li>
+		                              
+		                              
+		                          <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '13' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlistadmin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Lead Report</p>
+		                            </a>
+		                        </li>
+		                        
+		                        
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '15' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlist}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Lead Report</p>
+		                            </a>
+		                        </li>
+									</ul>
+		                        </li>	
+		                        
+		                        <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '55' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Deals<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+										<li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '14' AND ${a.status} == 'true'">
+		                            <a th:href="@{/deallist}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Deal</p>
+		                            </a>
+		                             </li>
+		                             
+		                             
+		                              <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '19' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlistdeal}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Deal Report</p>
+		                            </a>
+		                        </li> 
+		                        
+		                          <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '20' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlistdealadmin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Deal Report</p>
+		                            </a>
+		                        </li>
+									</ul>
+		                        </li>	
+		                        
+		                        
+		                          <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '50' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Master<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+		                             <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '4' AND ${a.status} == 'true'">
+		                            <a th:href="@{/lead/master}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Lead Source</p>
+		                            </a>
+		                        </li>
+		                        
+		                         <!-- -------------  Master Admin Lead Status  ---------------- -->
+		                        
+		                         <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '5' AND ${a.status} == 'true'">
+		                            <a th:href="@{/lead/status}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Lead Status</p>
+		                            </a>
+		                        </li>
+		                        
+		                         <!-- -------------  Master Admin Industry  ---------------- -->
+		                        
+		                         <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '6' AND ${a.status} == 'true'">
+		                            <a th:href="@{/lead/industry}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Industry</p>
+		                            </a>
+		                        </li>
+		                        
+		                         <!-- -------------  Master Admin No of Employee  ---------------- -->
+		                        
+		                             <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '7' AND ${a.status} == 'true'">
+		                            <a th:href="@{/lead/employee}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>No of Employee</p>
+		                            </a>
+		                        </li>
+		                         
+		                         <!-- -------------  Master Admin Account Type  ---------------- -->
+		                         
+		                             <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '8' AND ${a.status} == 'true'">
+		                            <a th:href="@{/accountType}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Account Type </p>
+		                            </a>
+		                        </li>
+		                        
+		                        <!-- -------------  Master Admin OwnerShip  ---------------- -->
+		                        
+		                            <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '9' AND ${a.status} == 'true'">
+		                            <a th:href="@{/ownership}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>OwnerShip</p>
+		                            </a>
+		                        </li>
+		                         <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '16' AND ${a.status} == 'true'">
+		                            <a th:href="@{/stage}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Stage</p>
+		                            </a>
+		                        </li>
+		                              <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '29' AND ${a.status} == 'true'">
+		                            <a th:href="@{/account/status}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Account Status</p>
+		                            </a>
+		                        </li>
+		                        
+		                          <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '30' AND ${a.status} == 'true'">
+		                            <a th:href="@{/contact/status}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Contact Status</p>
+		                            </a>
+		                        </li>
+		                            <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '28' AND ${a.status} == 'true'">
+		                            <a th:href="@{/master/annualrevenu}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Annual Revenu</p>
+		                            </a>
+		                        </li>
+		                        
+		                           <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '65' AND ${a.status} == 'true'">
+		                            <a th:href="@{/stagestatus}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Stage Status</p>
+		                            </a>
+		                        </li>
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '66' AND ${a.status} == 'true'">
+		                            <a th:href="@{/campagin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Campagin</p>
+		                            </a>
+		                        </li>
+		                        
+		                            </ul>
+		                          </li>
+		                    
+		                     <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '12' AND ${a.status} == 'true'">
+		                            <a th:href="@{/employee}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Add Employee</p>
+		                            </a>
+		                        </li>
+		                    
+		                       <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '67' AND ${a.status} == 'true'">
+		                            <a th:href="@{/resource/{id}}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Resource</p>
+		                            </a>
+		                        </li>
+		                    
+		                     <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '57' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Work Planner<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+										<li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '58' AND ${a.status} == 'true'">
+		                            <a th:href="@{/addcompanyname}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Add Customer</p>
+		                            </a>
+		                             </li>
+		                             
+		                             
+		                              <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '59' AND ${a.status} == 'true'">
+		                            <a th:href="@{/category}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Category</p>
+		                            </a>
+		                        </li> 
+		                        
+		                          <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '60' AND ${a.status} == 'true'">
+		                            <a th:href="@{/add_projectname}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p> Project Name </p>
+		                            </a>
+		                        </li>
+		                        
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '61' AND ${a.status} == 'true'">
+		                            <a th:href="@{/addmilestone}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p> MileStone</p>
+		                            </a>
+		                        </li>
+		                        
+		                           <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '62' AND ${a.status} == 'true'">
+		                            <a th:href="@{/assignTask}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p> Assign Task</p>
+		                            </a>
+		                        </li>
+		                        
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '63' AND ${a.status} == 'true'">
+		                            <a th:href="@{/addtask}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p> Task</p>
+		                            </a>
+		                        </li>
+		                        
+		                       <!-- <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '64' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlistdealadmin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p> Work Planner</p>
+		                            </a>
+		                        </li>-->
+		                        
+									</ul>
+		                        </li>	
+		                    
+		                         <li class="nav-item" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '32' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/feedback/add}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Feedback Form</p>
+		                                    </a>
+		                                </li>
+		                       
+		                        
+		                       <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '25' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Feedback<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+		                               
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '26' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/feedback/add}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Feedback Form</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '27' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/FeedbackList}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>Feedback List</p>
+		                                    </a>
+		                                </li>
+		                            </ul>
+		                        </li>
+		                        
+		                        
+		                                <li class="nav-item" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '64' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/item/add}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Add Product </p>
+		                                    </a>
+		                                </li>
+		                        
+		                         <li class="nav-item" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '68' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/invoice/add}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Create Invoice </p>
+		                                    </a>
+		                                </li>
+		                        
+		                    
+		                    
+		                    <!-- -------------  Master Admin Lead Source  ---------------- -->
+		                    
+		                        <!-- <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '4' AND ${a.status} == 'true'">
+		                            <a th:href="@{/lead/master}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Lead Source</p>
+		                            </a>
+		                        </li>
+		                        
+		                          -------------  Master Admin Lead Status  ---------------- 
+		                        
+		                         <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '5' AND ${a.status} == 'true'">
+		                            <a th:href="@{/lead/status}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Lead Status</p>
+		                            </a>
+		                        </li>
+		                        
+		                          -------------  Master Admin Industry  ---------------- 
+		                        
+		                         <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '6' AND ${a.status} == 'true'">
+		                            <a th:href="@{/lead/industry}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Industry</p>
+		                            </a>
+		                        </li>
+		                        
+		                          -------------  Master Admin No of Employee  ---------------- 
+		                        
+		                             <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '7' AND ${a.status} == 'true'">
+		                            <a th:href="@{/lead/employee}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>No of Employee</p>
+		                            </a>
+		                        </li>
+		                         
+		                          -------------  Master Admin Account Type  ---------------- 
+		                         
+		                             <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '8' AND ${a.status} == 'true'">
+		                            <a th:href="@{/accountType}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Account Type </p>
+		                            </a>
+		                        </li>
+		                        
+		                         -------------  Master Admin OwnerShip  ---------------- 
+		                        
+		                            <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '9' AND ${a.status} == 'true'">
+		                            <a th:href="@{/ownership}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>OwnerShip</p>
+		                            </a>
+		                        </li>-->
+		                        
+		                        <!--  <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '29' AND ${a.status} == 'true'">
+		                            <a th:href="@{/account/status}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Account Status</p>
+		                            </a>
+		                        </li>
+		                        
+		                          <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '30' AND ${a.status} == 'true'">
+		                            <a th:href="@{/contact/status}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Contact Status</p>
+		                            </a>
+		                        </li>-->
+		                         
+		                         
+		                       
+		                        
+		                        
+		                        <!--
+		                          <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '13' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlistadmin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Lead Report</p>
+		                            </a>
+		                        </li>
+		                        
+		                        
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '15' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlist}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Lead Report</p>
+		                            </a>
+		                        </li>-->
+		                        
+		                       <!-- <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '16' AND ${a.status} == 'true'">
+		                            <a th:href="@{/stage}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Stage</p>
+		                            </a>
+		                        </li>-->
+		                         <!-- <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '17' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlistaccount}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Account Report</p>
+		                            </a>
+		                        </li>
+		                        
+		                          <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '18' AND ${a.status} == 'true'">
+		                            <a th:href="@{/accountreportlistadmin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Account Report</p>
+		                            </a>
+		                        </li>-->
+		                        
+		                       <!-- <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '29' AND ${a.status} == 'true'">
+		                            <a th:href="@{/contactreportlistadmin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Contact Report</p>
+		                            </a>
+		                        </li> -->
+		                        
+		                         <!-- <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '19' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlistdeal}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Deal Report</p>
+		                            </a>
+		                        </li> 
+		                        
+		                          <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '20' AND ${a.status} == 'true'">
+		                            <a th:href="@{/reportlistdealadmin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Deal Report</p>
+		                            </a>
+		                        </li>-->
+		                        
+		                         <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '21' AND ${a.status} == 'true'">
+		                            <a th:href="@{/excelupload}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Lead Excel Upload</p>
+		                            </a>
+		                        </li>
+		                        
+		                         <!--<li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '22' AND ${a.status} == 'true'">
+		                            <a th:href="@{/contactexcelupload}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Contact Excel Upload</p>
+		                            </a>
+		                        </li>-->
+		                        <!-- <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '23' AND ${a.status} == 'true'">
+		                            <a th:href="@{/accountexcelupload}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Account Excel Upload</p>
+		                            </a>
+		                        </li>-->
+		                        
+		                         <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '43' AND ${a.status} == 'true'">
+		                            <a th:href="@{/salesbudget}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Sales Budgeting</p>
+		                            </a>
+		                        </li>
+		                        
+		                         <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '51' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Sales Budget<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+										<li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '44' AND ${a.status} == 'true'">
+		                            <a th:href="@{/sale/add}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Sales Budgeting Form </p>
+		                            </a>
+		                        </li>
+		                        
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '45' AND ${a.status} == 'true'">
+		                            <a th:href="@{/salelist}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Budget </p>
+		                            </a>
+		                        </li>
+										
+								</ul>
+						    </li>
+		                        <!--<li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '44' AND ${a.status} == 'true'">
+		                            <a th:href="@{/sale/add}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Sales Budgeting Form </p>
+		                            </a>
+		                        </li>
+		                        
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '45' AND ${a.status} == 'true'">
+		                            <a th:href="@{/salelist}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Budget </p>
+		                            </a>
+		                        </li>-->
+		                        
+		                        <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '33' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Landscape<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+		                               
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '34' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/email/add}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Email</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '35' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/FeedbackList}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>ERP</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '36' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/feedback/add}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Accounts & Finance </p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '37' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/FeedbackList}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>CRM</p>
+		                                    </a>
+		                                </li><li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '38' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/feedback/add}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Inventory</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '39' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/FeedbackList}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>Manufacturing</p>
+		                                    </a>
+		                                </li><li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '40' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/feedback/add}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Operations</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '41' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/FeedbackList}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>HRMS</p>
+		                                    </a>
+		                                </li>
+		                                 <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '42' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/FeedbackList}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>Payrolls</p>
+		                                    </a>
+		                                </li>
+		                                
+		                            </ul>
+		                        </li>
+		                          
+		                       <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '46' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Product Resource<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '47' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/product/add}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Product data sheet</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '48' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/datasheet/add}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>Safety data sheet</p>
+		                                    </a>
+		                                </li>
+		                               <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '49' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/casestudies/add}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>Case Studies</p>
+		                                    </a>
+		                                </li> 
+		                            </ul>
+		                        </li>
+		                        
+		                        <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '24' AND ${a.status} == 'true'">
+		                            <a th:href="@{/create_company}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Add Company</p>
+		                            </a>
+		                        </li>
+		                        
+		                      <!--  <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '31' AND ${a.status} == 'true'">
+		                            <a th:href="@{/addclinet}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Add Clinet Name</p>
+		                            </a>
+		                        </li>
+		                        
+		                           <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '56' AND ${a.status} == 'true'">
+		                            <a th:href="@{/addcategory}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Add Category</p>
+		                            </a>
+		                        </li>-->
+		                    
+		                         <!--<li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '28' AND ${a.status} == 'true'">
+		                            <a th:href="@{/master/annualrevenu}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Annual Revenu</p>
+		                            </a>
+		                        </li>-->
+		                        
+		                      <!--    <li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '4' AND ${a.status} == 'true'">
+		                            <a th:href="@{/lead/masteradmin}" class="nav-link">
+		                                <i class="fa-regular fa-circle mr-2"></i>
+		                                <p>Contact Lead</p>
+		                            </a>
+		                        </li> -->
+		                        
+		                        <!-- <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '3' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fas fa-edit mr-1"></i>
+		                                <p class="">Add New Company<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '4' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/companydetails}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Add Company Details</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '5' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/companydetailsList}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>Company Details List</p>
+		                                    </a>
+		                                </li>
+		                            </ul>
+		                        </li>
+		                        
+		                        <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '6' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fas fa-edit mr-1"></i>
+		                                <p class="">Add Group Company<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+		                               
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '7' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/groupcompanydetails}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Add Company Details</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '8' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/groupcompanydetailslist}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>Company Details List</p>
+		                                    </a>
+		                                </li>
+		                            </ul>
+		                        </li>
+		                        
+		                        
+		                        <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '9' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                              <i class="fa-solid fa-circle-exclamation  mr-2"></i>
+		                                <p>Main Master <i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+		                               
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '10' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/EmploymentType}" class="nav-link">
+		                                        <i class="fa-regular fa-circle"></i>
+		                                        <p>Employment Type</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '11' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/JobLocation}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Job Location</p>
+		                                    </a>
+		                                </li>
+										<li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '12' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/Industry}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Industry</p>
+		                                    </a>
+		                                </li>
+										<li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '13' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/AddFunctionalArea}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Functional Area</p>
+		                                    </a>
+		                                </li>
+										<li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '14' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/AddWorkMode}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Work Mode</p>
+		                                    </a>
+		                                </li>
+										<li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '15' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/AddAnnualSalary}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Annual Salary</p>
+		                                    </a>
+		                                </li>
+										<li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '16' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/AddQualification}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Qualification</p>
+		                                    </a>
+		                                </li>
+										<li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '17' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/Roles}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Roles</p>
+		                                    </a>
+		                                </li>
+										<li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '18' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/AddEducationStream}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Education Stream</p>
+		                                    </a>
+		                                </li>
+										<li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '19' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/AddDepartment}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Add Department</p>
+		                                    </a>
+		                                </li>
+		                            </ul>
+		                        </li>
+		
+		                        <li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '20' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-user mr-2"></i>
+		                                <p class="">Personal Details List<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+		                               
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '21' AND ${a1.status} == 'true'">
+		                                    <a th:href="@{/showFormForUpdate}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Update Personal Details</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '22' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/address}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>Address Details</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '23' AND ${a1.status} == 'true'">
+		                                    <a th:href="@{/education}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>Education Details</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '24' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/certificate_details}" class="nav-link">
+		                                	<i class="fa-solid fa-chart-line"></i>
+		                                        <p>Certificate Details</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '25' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/work_experience}" class="nav-link">
+		                                	<i class="fa-solid fa-chart-line"></i>
+		                                        <p>Work Experience Details</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '26' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/career_break}" class="nav-link">
+		                                	<i class="fa-solid fa-chart-line"></i>
+		                                        <p>Career Break Details</p>
+		                                    </a>
+		                                </li>
+		                            </ul>
+		                        </li>
+		                  		<li class="nav-item" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '27' AND ${a1.status} == 'true'">
+		                        	<a  th:href="@{/PostJob}" class="nav-link">
+		                          		<i class="fa-regular fa-circle"></i>
+		                             		<p>Post Job </p>
+		                          	</a>
+		                    	</li>
+								<li class="nav-item" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '28' AND ${a1.status} == 'true'">
+		                        	<a th:href="@{/JobPostList}" class="nav-link">
+		                            	<i class="fa-solid fa-chart-line"></i>
+		                              		<p>Post Job List</p>
+		                         	</a>
+		                    	</li>
+								<li class="nav-item" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '29' AND ${a1.status} == 'true'">
+		                       		<a th:href="@{/recommendedjob}" class="nav-link">
+		                          		<i class="fa-regular fa-circle"></i>
+		                           			<p>Recommended Job</p>
+		                         	</a>
+		                   		</li>
+								<li class="nav-item" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '30' AND ${a1.status} == 'true'">
+		                         	<a th:href="@{/jobResponse}" class="nav-link">
+		                       			<i class="fa-regular fa-circle"></i>
+		                            		<p>Jobs & Responses</p>
+		                           	</a>
+		                        </li>
+		                            
+								<li class="nav-item has-treeview" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '31' AND ${a.status} == 'true'">
+		                            <a href="" class="nav-link">
+		                               <i class="fa-solid fa-message  mr-2"></i>
+		                                <p class="">Feedback<i class="fas fa-angle-right right"></i></p>
+		                            </a>
+		                            <ul class="nav nav-treeview">
+		                               
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '32' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/FeedbackForm}" class="nav-link">
+		                                       <i class="fa-regular fa-circle"></i>
+		                                        <p>Feedback Form</p>
+		                                    </a>
+		                                </li>
+		                                <li class="nav-item" style="margin-left:20px" th:each="a1:${listMainsidebarAuthority}" th:if="${a1.mainsidebarid} == '33' AND ${a1.status} == 'true'">
+		                                    <a  th:href="@{/FeedbackList}" class="nav-link">
+		                                       <i class="fa-solid fa-chart-line"></i>
+		                                        <p>Feedback List</p>
+		                                    </a>
+		                                </li>
+		                            </ul>
+		                        </li>
+								
+								<li class="nav-item" th:each="a:${listMainsidebarAuthority}" th:if="${a.mainsidebarid} == '34' AND ${a.status} == 'true'">
+		                            <a  th:href="@{/login}" class="nav-link">
+		                                <i class="fas fa-sign-out-alt mr-2"></i>
+		                                <p>Logout</p>
+		                            </a>
+		                        </li> -->
+		
+		                    </ul>
+		                </nav>
+					</div>
+				</aside>
+		 	</div>
+		</header>
+	</body>
+</html>
